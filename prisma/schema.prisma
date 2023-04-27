@@ -13,7 +13,7 @@ datasource db {
 
 model Set {
     id          String   @id @default(cuid())
-    user        User     @relation(fields: [userId], references: [id])
+    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId      String
     name        String   @db.VarChar(50)
     description String   @db.VarChar(200)
@@ -25,7 +25,7 @@ model Set {
 
 model Card {
     id        String   @id @default(cuid())
-    set       Set      @relation(fields: [setId], references: [id])
+    set       Set      @relation(fields: [setId], references: [id], onDelete: Cascade)
     setId     String
     front     String   @db.VarChar(200)
     back      String   @db.VarChar(500)

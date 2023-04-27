@@ -1,6 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { router, protectedProcedure } from '../../trpc';
+import { SetSchema } from '@pages/create';
 
 export const setsRouter = router({
   get: protectedProcedure.query(async ({ ctx }) => {
@@ -15,13 +16,7 @@ export const setsRouter = router({
     }
   }),
   create: protectedProcedure
-    .input(
-      z.object({
-        name: z.string().max(50),
-        description: z.string().max(200),
-        cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })),
-      }),
-    )
+    .input(SetSchema)
     .mutation(async ({ ctx, input: { name, description, cards } }) => {
       try {
         const set = await ctx.prisma.user.update({
