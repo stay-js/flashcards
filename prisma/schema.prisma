@@ -24,10 +24,10 @@ model Set {
 
 model Card {
     id        String   @id @default(cuid())
+    set       Set      @relation(fields: [setId], references: [id])
+    setId     String
     front     String   @db.VarChar(200)
     back      String   @db.VarChar(500)
-    setId     String
-    set       Set      @relation(fields: [setId], references: [id])
     createdAt DateTime @default(now())
 
     @@index([setId])
