@@ -17,15 +17,16 @@ export const setsRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        name: z.string().max(200),
+        name: z.string().max(50),
+        description: z.string().max(200),
         cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })),
       }),
     )
-    .mutation(async ({ ctx, input: { name, cards } }) => {
+    .mutation(async ({ ctx, input: { name, description, cards } }) => {
       try {
         const set = await ctx.prisma.user.update({
           where: { id: ctx.session.user.id },
-          data: { sets: { create: { name, cards: { create: cards } } } },
+          data: { sets: { create: { name, description, cards: { create: cards } } } },
         });
         return set;
       } catch (error) {

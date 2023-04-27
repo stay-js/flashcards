@@ -12,12 +12,13 @@ datasource db {
 }
 
 model Set {
-    id        String   @id @default(cuid())
-    user      User     @relation(fields: [userId], references: [id])
-    userId    String
-    name      String   @db.VarChar(200)
-    cards     Card[]
-    createdAt DateTime @default(now())
+    id          String   @id @default(cuid())
+    user        User     @relation(fields: [userId], references: [id])
+    userId      String
+    name        String   @db.VarChar(50)
+    description String   @db.VarChar(200)
+    cards       Card[]
+    createdAt   DateTime @default(now())
 
     @@index([userId])
 }
