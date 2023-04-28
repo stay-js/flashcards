@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
-import { Meta } from '@components/Meta';
-import { useSession } from 'next-auth/react';
-import { SignIn } from '@components/SignIn';
-import { TextInput, Textarea } from '@components/Input';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { z } from 'zod';
 import { trpc } from '@utils/trpc';
-import { useRouter } from 'next/router';
+import { Meta } from '@components/Meta';
+import { SignIn } from '@components/SignIn';
+import { TextInput, Textarea } from '@components/Input';
 
 export const SetSchema = z.object({
   name: z.string().max(50),

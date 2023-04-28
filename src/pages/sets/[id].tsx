@@ -1,10 +1,11 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 import type { Set, Card, User } from '@prisma/client';
 import Image from 'next/image';
-import { Meta } from '@components/Meta';
-import { Error } from '@components/state';
-import { prisma } from '@server/db';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import { prisma } from '@server/db';
+import { Meta } from '@components/Meta';
+import { Error404 } from '@pages/404';
 
 const Page: NextPage<{
   set:
@@ -17,13 +18,22 @@ const Page: NextPage<{
   const [currentCard, setCurrentCard] = useState<number>(0);
   const [flipped, setFlipped] = useState<boolean>(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     setFlipped(false);
   }, [currentCard]);
 
-  if (!set) return <Error />;
+  if (!set)
+    return (
+      <>
+        <Meta path={router.pathname} title="Not Found - Flashcards" desc="Not Found - Flashcards" />
 
-  const { id, user, name, description, cards } = set;
+        <Error404 />
+      </>
+    );
+
+  const { user, name, description, cards } = set;
 
   const incrementCard = () => {
     if (currentCard == cards.length - 1) return;
@@ -37,7 +47,7 @@ const Page: NextPage<{
 
   return (
     <>
-      <Meta path={`/sets${id}`} title={`${name} - Flashcards`} desc={description} />
+      <Meta path={router.pathname} title={`${name} - Flashcards`} desc={description} />
 
       <main className="mx-auto flex max-w-4xl flex-col gap-4 p-6">
         <div>
