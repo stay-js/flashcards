@@ -7,6 +7,7 @@ import { trpc } from '@utils/trpc';
 import { Meta } from '@components/Meta';
 import { SignIn } from '@components/SignIn';
 import { TextInput, Textarea } from '@components/Input';
+import { Button } from '@components/Button';
 
 export const SetSchema = z.object({
   name: z.string().max(50),
@@ -44,12 +45,7 @@ const Create: React.FC = () => {
       <form onSubmit={handleSubmit} className="mx-auto flex max-w-2xl flex-col gap-6 p-6">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">Create a new set</h1>
-          <button
-            type="submit"
-            className="w-fit rounded border-2 border-blue-700 bg-blue-700 p-2 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-blue-700"
-          >
-            Create
-          </button>
+          <Button type="submit">Create</Button>
         </div>
 
         <div className="flex flex-col gap-4">
@@ -78,14 +74,14 @@ const Create: React.FC = () => {
               <h2 className="text-xl font-semibold">{index + 1}. Card</h2>
 
               {index !== 0 && (
-                <button
-                  className="w-fit rounded border-2 border-red-500 bg-red-500 px-3 py-1 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-red-500"
+                <Button
+                  variant="red"
                   onClick={() =>
                     setValues({ ...values, cards: values.cards.filter((_, i) => i !== index) })
                   }
                 >
                   Delete
-                </button>
+                </Button>
               )}
             </div>
 
@@ -127,14 +123,13 @@ const Create: React.FC = () => {
           </div>
         ))}
 
-        <button
-          className="rounded border-2 border-blue-700 bg-blue-700 p-2 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-blue-700"
+        <Button
           onClick={() =>
             setValues({ ...values, cards: [...values.cards, { front: '', back: '' }] })
           }
         >
           Add card
-        </button>
+        </Button>
       </form>
     </main>
   );

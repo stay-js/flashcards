@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Meta } from '@components/Meta';
+import { Button } from '@components/Button';
 
 export const Error404 = () => (
   <main className="flex flex-col items-center gap-12 pt-20">
@@ -13,12 +13,7 @@ export const Error404 = () => (
       <h3 className="text-lg font-medium">Maybe try again later?</h3>
     </div>
 
-    <Link
-      className="rounded border-2 border-blue-700 bg-blue-700 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-blue-700"
-      href="/"
-    >
-      Go back to home
-    </Link>
+    <Button href="/">Go back to home</Button>
   </main>
 );
 

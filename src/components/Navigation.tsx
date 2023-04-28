@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signOut, signIn, useSession } from 'next-auth/react';
+import { Button } from '@components/Button';
 
 export const Navigation: React.FC = () => {
   const { data: session } = useSession();
@@ -30,21 +31,9 @@ export const Navigation: React.FC = () => {
       )}
 
       {session ? (
-        <button
-          type="button"
-          className="rounded border-2 border-blue-700 bg-blue-700 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-blue-700"
-          onClick={() => signOut()}
-        >
-          Sign Out
-        </button>
+        <Button onClick={() => signOut()}>Sign Out</Button>
       ) : (
-        <button
-          type="button"
-          className="rounded border-2 border-blue-700 bg-blue-700 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-blue-700"
-          onClick={() => signIn('github')}
-        >
-          Sign In
-        </button>
+        <Button onClick={() => signIn('github')}>Sign In</Button>
       )}
     </div>
   );

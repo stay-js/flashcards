@@ -9,6 +9,7 @@ import { TbAlertCircle } from 'react-icons/tb';
 import { trpc } from '@utils/trpc';
 import { Meta } from '@components/Meta';
 import { SignIn } from '@components/SignIn';
+import { Button } from '@components/Button';
 
 const Sets: React.FC = () => {
   const [setToDelete, setSetToDelete] = useState<string | null>(null);
@@ -60,21 +61,13 @@ const Sets: React.FC = () => {
                   </div>
 
                   <div className="flex gap-2">
-                    <button
-                      type="button"
-                      className="rounded border-2 border-green-500 bg-green-500 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-green-500"
-                      onClick={() => setSetToDelete(null)}
-                    >
+                    <Button onClick={() => setSetToDelete(null)} variant="green">
                       Cancel
-                    </button>
+                    </Button>
 
-                    <button
-                      type="button"
-                      className="rounded border-2 border-red-500 bg-red-500 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-red-500"
-                      onClick={() => deleteSet({ id: setToDelete })}
-                    >
+                    <Button onClick={() => deleteSet({ id: setToDelete })} variant="red">
                       Delete <span className="hidden sm:inline-block">Set</span>
-                    </button>
+                    </Button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -133,13 +126,9 @@ const Sets: React.FC = () => {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  className="whitespace-nowrap rounded border-2 border-red-500 bg-red-500 p-3 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-red-500"
-                  onClick={() => setSetToDelete(id)}
-                >
+                <Button onClick={() => setSetToDelete(id)} variant="red">
                   Delete <span className="hidden sm:inline-block">Set</span>
-                </button>
+                </Button>
               </div>
             ))}
           </div>
