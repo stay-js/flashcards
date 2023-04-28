@@ -27,7 +27,7 @@ const Page: NextPage<{
   if (!set)
     return (
       <>
-        <Meta path={router.pathname} title="Not Found - Flashcards" desc="Not Found - Flashcards" />
+        <Meta path={router.asPath} title="Not Found - Flashcards" desc="Not Found - Flashcards" />
 
         <Error404 />
       </>
@@ -47,7 +47,7 @@ const Page: NextPage<{
 
   return (
     <>
-      <Meta path={router.pathname} title={`${name} - Flashcards`} desc={description} />
+      <Meta path={router.asPath} title={`${name} - Flashcards`} desc={description} />
 
       <main className="mx-auto flex max-w-4xl flex-col gap-4 p-6">
         <div>
@@ -78,7 +78,7 @@ const Page: NextPage<{
           {flipped ? cards[currentCard]?.back : cards[currentCard]?.front}
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between">
           <button
             className="rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
             onClick={decrementCard}

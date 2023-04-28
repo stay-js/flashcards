@@ -24,11 +24,7 @@ export const Error404 = () => (
 
 const Page: NextPage = () => (
   <>
-    <Meta
-      path={useRouter().pathname}
-      title="Not Found - Flashcards"
-      desc="Not Found - Flashcards"
-    />
+    <Meta path={useRouter().asPath} title="Not Found - Flashcards" desc="Not Found - Flashcards" />
 
     <Error404 />
   </>
