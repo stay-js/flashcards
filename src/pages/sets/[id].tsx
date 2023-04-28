@@ -1,20 +1,17 @@
-import type { NextPage, GetStaticPaths, GetStaticProps } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import type { Set, Card, User } from '@prisma/client';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { prisma } from '@server/db';
 import { Meta } from '@components/Meta';
-import { Error404 } from '@pages/404';
 
 const Page: NextPage<{
-  set:
-    | (Set & {
-        user: User;
-        cards: Card[];
-      })
-    | null;
-}> = ({ set }) => {
+  set: Set & {
+    user: User;
+    cards: Card[];
+  };
+}> = ({ set: { user, name, description, cards } }) => {
   const [currentCard, setCurrentCard] = useState<number>(0);
   const [flipped, setFlipped] = useState<boolean>(false);
 
@@ -23,17 +20,6 @@ const Page: NextPage<{
   useEffect(() => {
     setFlipped(false);
   }, [currentCard]);
-
-  if (!set)
-    return (
-      <>
-        <Meta path={router.asPath} title="Not Found - Flashcards" desc="Not Found - Flashcards" />
-
-        <Error404 />
-      </>
-    );
-
-  const { user, name, description, cards } = set;
 
   const incrementCard = () => {
     if (currentCard !== cards.length - 1) setCurrentCard((value) => value + 1);
@@ -100,19 +86,12 @@ const Page: NextPage<{
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const sets = await prisma.set.findMany({ select: { id: true } });
-
-  return {
-    paths: sets.map(({ id }) => ({ params: { id } })),
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ res, params }) => {
   const id = params?.id;
 
-  if (!id || typeof id !== 'string') return { props: { set: null } };
+  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+
+  if (!id || typeof id !== 'string') return { redirect: { destination: '/404', permanent: false } };
 
   try {
     const set = await prisma.set.findUnique({
@@ -122,10 +101,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         cards: true,
       },
     });
+
+    if (!set) return { redirect: { destination: '/404', permanent: false } };
+
     return { props: { set } };
   } catch (error) {
     console.error(error);
-    return { props: { set: null } };
+    return { redirect: { destination: '/404', permanent: false } };
   }
 };
 
