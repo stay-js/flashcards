@@ -252,26 +252,26 @@
     use-sync-external-store "^1.2.0"
 
 "@trpc/client@^10.21.3-alpha.3":
-  version "10.21.3-alpha.3"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.21.3-alpha.3.tgz#d5010cc5062bba2c0c6df7e61352edf28a11d058"
-  integrity sha512-HHBtJ9AijdC/zzuaL5yd/g/LnRc7K9ECWOpOyRXHcDVmStl1EpwnE+FkuozN28G1ArVEWNSAFRsmOB1eCwxyjA==
+  version "10.21.3-test.0"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.21.3-test.0.tgz#5d7fb9c19c5bed073dcfebe1b7fd23b75aa26963"
+  integrity sha512-DrK4H3W+ASGw1JQbvdEkTWRpy7taVNcSTmdLw6OvVemWpc6x2fETPMYMORLMthfRlwWzc7OIfPqXjbrcpFxHBA==
 
 "@trpc/next@^10.21.3-alpha.3":
-  version "10.21.3-alpha.3"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.21.3-alpha.3.tgz#d7378ce1f1887265e1ed0589b015abff806173a5"
-  integrity sha512-Wq8oKXSqEE1Dy6Abkw7o+w4IDasGTAvghEC9uEcQXwkJgNyEw92DqPF14+ZUyZ/WVND46YtEFAxObHG580qomg==
+  version "10.21.3-test.0"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.21.3-test.0.tgz#8828d417a7036b7433ae6396c413e916cb0ebde9"
+  integrity sha512-+ctkJ0fK7KXCTPRKUvMgV6DpkiyOy43AmmFzGGZO8MHxR+cIE4NSCAyS+9nyrXwptfBYYSsSNAgE24UQjbhfJQ==
   dependencies:
     react-ssr-prepass "^1.5.0"
 
 "@trpc/react-query@^10.21.3-alpha.3":
-  version "10.21.3-alpha.3"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.21.3-alpha.3.tgz#56f36b798de6e582f4ff6697414ae2ad0cdcb4b4"
-  integrity sha512-9PxLixbAJ4+ApHxe1Sw5w2hUG62hI5yFwiE9z2MMjHj62Jt7z3oQdJ+/tzx6C+50bX92klrnFWpvKI6gdHBMbw==
+  version "10.21.3-test.0"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.21.3-test.0.tgz#33ff720ea961f87e811c7a3e63681f76c11e1419"
+  integrity sha512-+hIynImb1Pm6ZRqAkqMvm+oVqkZDFav8VItX4YQ0yqTiKE6mgI8HS+hguswruvscp1mQRfi9dqBrjGJ62hYzNA==
 
 "@trpc/server@^10.21.3-alpha.3":
-  version "10.21.3-alpha.3"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.21.3-alpha.3.tgz#d8bd1570cb56264c4395f1dcfe108472cea6075e"
-  integrity sha512-ICZbOLocqd570lHpiOt7XaE5vfLXyalNPl7JPtsP5jQ1WUaORB34R6sgvfvv/boruzM9ArpYTG7KRhBqM0SJoA==
+  version "10.21.3-test.0"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.21.3-test.0.tgz#9a9a3014f31f08511f073608bc5faf8956092b53"
+  integrity sha512-tU4hHDEfoXBZi2bGvs0Aw8G0aRm1grUz5GYLhCvGTGfmBsCvnWV5MKZgAP9yyn2e+7irVAHxLj961pn373Pu4w==
 
 "@types/eslint@^8.21.3":
   version "8.37.0"
@@ -297,9 +297,9 @@
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
 "@types/node@^18.15.5":
-  version "18.16.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.1.tgz#5db121e9c5352925bb1f1b892c4ae620e3526799"
-  integrity sha512-DZxSZWXxFfOlx7k7Rv4LAyiMroaxa3Ly/7OOzZO8cBNho0YzAi4qlbrx8W27JGqG57IgR/6J7r+nOJWw6kcvZA==
+  version "18.16.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.2.tgz#2f610ea71034b3971c312192377f8a7178eb57f1"
+  integrity sha512-GQW/JL/5Fz/0I8RpeBG9lKp0+aNcXEaVL71c0D2Q0QHDTFvlYKT7an0onCUXj85anv7b4/WesqdfchLc0jtsCg==
 
 "@types/prettier@^2.7.2":
   version "2.7.2"
@@ -811,9 +811,9 @@ doctrine@^3.0.0:
     esutils "^2.0.2"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.374"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.374.tgz#091b2de9d80b970f9b5e689675ea62622cd1d74b"
-  integrity sha512-dNP9tQNTrjgVlSXMqGaj0BdrCS+9pcUvy5/emB6x8kh0YwCoDZ0Z4ce1+7aod+KhybHUd5o5LgKrc5al4kVmzQ==
+  version "1.4.376"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.376.tgz#a771d6c4db028634df126348a4f94075e07e7f65"
+  integrity sha512-TFeOKd98TpJzRHkr4Aorn16QkMnuCQuGAE6IZ0wYF+qkbSfMPqjplvRppR02tMUpVxZz8nyBNvVm9lIZsqrbPQ==
 
 emoji-regex@^9.2.2:
   version "9.2.2"
@@ -1424,6 +1424,13 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hoist-non-react-statics@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
+  integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
+  dependencies:
+    react-is "^16.7.0"
+
 ignore@^5.2.0:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.4.tgz#a291c0c6178ff1b960befe47fcdec301674a6324"
@@ -1835,6 +1842,13 @@ next-auth@^4.21.0:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
+next-superjson-plugin@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/next-superjson-plugin/-/next-superjson-plugin-0.5.7.tgz#9d0b3a32946f85af7423e835d7396f18e1b30507"
+  integrity sha512-bkF49B/Pcf0GCh10vXL+hjBodC404FgzEsl3wtrjwqvTkoWDnqBOgP2KqWR9sF1tz4MSMlo872Q4Srl/2XRFWw==
+  dependencies:
+    hoist-non-react-statics "^3.3.2"
+
 next@^13.2.4:
   version "13.3.1"
   resolved "https://registry.yarnpkg.com/next/-/next-13.3.1.tgz#17625f7423db2e059d71b41bd9031756cf2b33bc"
@@ -2144,9 +2158,9 @@ prelude-ls@^1.2.1:
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
 prettier-plugin-tailwindcss@^0.2.6:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.2.7.tgz#2314d728cce9c9699ced41a01253eb48b4218da5"
-  integrity sha512-jQopIOgjLpX+y8HeD56XZw7onupRTC0cw7eKKUimI7vhjkPF5/1ltW5LyqaPtSyc8HvEpvNZsvvsGFa2qpa59w==
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.2.8.tgz#e9c0356680331f909a86fefe8fc2b247c21e23a2"
+  integrity sha512-KgPcEnJeIijlMjsA6WwYgRs5rh3/q76oInqtMXBA/EMcamrcYJpyhtRhyX1ayT9hnHlHTuO8sIifHF10WuSDKg==
 
 prettier@^2.8.6:
   version "2.8.8"
@@ -2197,7 +2211,7 @@ react-icons@^4.8.0:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.8.0.tgz#621e900caa23b912f737e41be57f27f6b2bff445"
   integrity sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==
 
-react-is@^16.13.1:
+react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
@@ -2438,7 +2452,7 @@ sucrase@^3.32.0:
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
 
-superjson@1.12.3:
+superjson@^1.12.3:
   version "1.12.3"
   resolved "https://registry.yarnpkg.com/superjson/-/superjson-1.12.3.tgz#383aacfd795c6eef24c383c70154c6cbbcbfb31a"
   integrity sha512-0j+U70KUtP8+roVPbwfqkyQI7lBt7ETnuA7KXbTDX3mCKiD/4fXs2ldKSMdt0MCfpTwiMxo20yFU3vu6ewETpQ==

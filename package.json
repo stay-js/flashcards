@@ -20,10 +20,11 @@
     "@trpc/server": "^10.21.3-alpha.3",
     "next": "^13.2.4",
     "next-auth": "^4.21.0",
+    "next-superjson-plugin": "^0.5.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
-    "superjson": "1.12.3",
+    "superjson": "^1.12.3",
     "zod": "^3.21.4"
   },
   "devDependencies": {

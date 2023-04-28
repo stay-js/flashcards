@@ -8,6 +8,9 @@ const nextConfig = {
   images: {
     domains: ['avatars.githubusercontent.com'],
   },
+  experimental: {
+    swcPlugins: [['next-superjson-plugin', {}]],
+  },
 };
 
 export default nextConfig;

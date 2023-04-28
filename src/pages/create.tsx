@@ -31,7 +31,6 @@ const Create: React.FC = () => {
   });
 
   const { mutate } = trpc.sets.create.useMutation({
-    // onSuccess: (data) => router.push(`/sets/${data.id}`),
     onSuccess: () => router.push(`/sets`),
   });
 
@@ -64,7 +63,6 @@ const Create: React.FC = () => {
           />
 
           <Textarea
-            required
             label="Description:"
             placeholder="Please provide a description for this set!"
             rows={4}
@@ -78,14 +76,17 @@ const Create: React.FC = () => {
           <div key={index}>
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold">{index + 1}. Card</h2>
-              <button
-                className="w-fit rounded border-2 border-red-500 bg-red-500 px-3 py-1 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-red-500"
-                onClick={() =>
-                  setValues({ ...values, cards: values.cards.filter((_, i) => i !== index) })
-                }
-              >
-                Delete
-              </button>
+
+              {index !== 0 && (
+                <button
+                  className="w-fit rounded border-2 border-red-500 bg-red-500 px-3 py-1 text-sm font-bold text-white transition-all hover:bg-transparent hover:text-red-500"
+                  onClick={() =>
+                    setValues({ ...values, cards: values.cards.filter((_, i) => i !== index) })
+                  }
+                >
+                  Delete
+                </button>
+              )}
             </div>
 
             <div className="flex flex-col gap-2">
