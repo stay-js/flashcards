@@ -10,7 +10,10 @@ export const Meta: React.FC<{
     <link rel="icon" href="/favicon.svg" />
 
     <meta name="author" content="stay" />
-    <meta name="keywords" content="flashcards, flashcards app, stay, GitHub" />
+    <meta
+      name="keywords"
+      content="flashcards, flashcards app, stay, znagy, znagy.hu, quizlet, GitHub"
+    />
 
     <meta property="og:locale" content="en" />
     <meta property="og:type" content="website" key="og_type" />
