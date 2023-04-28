@@ -36,13 +36,11 @@ const Page: NextPage<{
   const { user, name, description, cards } = set;
 
   const incrementCard = () => {
-    if (currentCard == cards.length - 1) return;
-    setCurrentCard((value) => value + 1);
+    if (currentCard !== cards.length - 1) setCurrentCard((value) => value + 1);
   };
 
   const decrementCard = () => {
-    if (currentCard == 0) return;
-    setCurrentCard((value) => value - 1);
+    if (currentCard !== 0) setCurrentCard((value) => value - 1);
   };
 
   return (

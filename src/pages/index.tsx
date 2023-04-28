@@ -106,7 +106,7 @@ const Sets: React.FC = () => {
             {sets.map(({ id, name, description, _count: { cards } }) => (
               <div
                 key={id}
-                className="flex h-52 w-80 cursor-pointer flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
+                className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
               >
                 <div className="flex flex-col gap-3">
                   <Link href={`/sets/${id}`} className="group flex items-center justify-between">
