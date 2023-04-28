@@ -31,7 +31,7 @@ const Create: React.FC = () => {
   });
 
   const { mutate } = trpc.sets.create.useMutation({
-    onSuccess: () => router.push(`/sets`),
+    onSuccess: () => router.push('/'),
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
