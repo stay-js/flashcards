@@ -22,17 +22,6 @@ export const setsRouter = router({
       throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
     }
   }),
-  get: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input: { id } }) => {
-      try {
-        const set = await ctx.prisma.set.findUnique({ where: { id }, include: { cards: true } });
-        return set;
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
-    }),
   create: protectedProcedure
     .input(SetSchema)
     .mutation(async ({ ctx, input: { name, description, cards } }) => {
