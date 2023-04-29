@@ -2,7 +2,8 @@ import type { NextPage, GetServerSideProps } from 'next';
 import type { Set, Card, User } from '@prisma/client';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, Fragment } from 'react';
+import { Transition } from '@headlessui/react';
 import { prisma } from '@server/db';
 import { Meta } from '@components/Meta';
 
@@ -13,20 +14,25 @@ const Page: NextPage<{
   };
 }> = ({ set: { user, name, description, cards } }) => {
   const [currentCard, setCurrentCard] = useState<number>(0);
+  const [isShowing, setIsShowing] = useState<boolean>(true);
   const [flipped, setFlipped] = useState<boolean>(false);
 
   const router = useRouter();
 
-  useEffect(() => {
+  const mutateCard = (amount: number) => {
+    setIsShowing(false);
     setFlipped(false);
-  }, [currentCard]);
+    setCurrentCard((value) => value + amount);
+
+    setTimeout(() => setIsShowing(true), 300);
+  };
 
   const incrementCard = () => {
-    if (currentCard !== cards.length - 1) setCurrentCard((value) => value + 1);
+    if (currentCard !== cards.length - 1) mutateCard(1);
   };
 
   const decrementCard = () => {
-    if (currentCard !== 0) setCurrentCard((value) => value - 1);
+    if (currentCard !== 0) mutateCard(-1);
   };
 
   return (
@@ -55,16 +61,29 @@ const Page: NextPage<{
           </div>
         </div>
 
-        <div
-          className="grid min-h-[30rem] cursor-pointer place-content-center rounded-xl border bg-white p-12 text-center text-2xl font-medium"
-          onClick={() => setFlipped((value) => !value)}
-        >
-          {flipped ? cards[currentCard]?.back : cards[currentCard]?.front}
+        <div className="flex min-h-[30rem]">
+          <Transition
+            as={Fragment}
+            show={isShowing}
+            enter="transform transition duration-[400ms] ease-in-out"
+            enterFrom="opacity-0 scale-50"
+            enterTo="opacity-100 scale-100"
+            leave="transform transition duration-300 ease-in-out"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <div
+              className="grid w-full cursor-pointer select-none place-content-center rounded-xl border bg-white p-12 text-center text-2xl font-medium"
+              onClick={() => setFlipped((value) => !value)}
+            >
+              {isShowing && (flipped ? cards[currentCard]?.back : cards[currentCard]?.front)}
+            </div>
+          </Transition>
         </div>
 
         <div className="flex items-center justify-between">
           <button
-            className="rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
+            className="select-none rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
             onClick={decrementCard}
           >
             Previous
@@ -75,7 +94,7 @@ const Page: NextPage<{
           </span>
 
           <button
-            className="rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
+            className="select-none rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
             onClick={incrementCard}
           >
             Next
