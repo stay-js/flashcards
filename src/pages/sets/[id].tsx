@@ -120,15 +120,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!id || typeof id !== 'string') return { notFound: true };
 
   try {
-    const set = await prisma.set.findUnique({
+    const set = await prisma.set.findUniqueOrThrow({
       where: { id },
       include: {
         user: true,
         cards: true,
       },
     });
-
-    if (!set) return { notFound: true };
 
     return { props: { set } };
   } catch (error) {
