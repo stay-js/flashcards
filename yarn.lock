@@ -263,27 +263,27 @@
     "@tanstack/query-core" "4.29.5"
     use-sync-external-store "^1.2.0"
 
-"@trpc/client@^10.22.0":
-  version "10.22.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.22.0.tgz#e215a566baf2115a33eb3f3d33faf6be63a437dc"
-  integrity sha512-zM1JKYWHg8O19JtqZnXQpwRjCcW9iGVmuxj+gKGr0Xmfy8OQRzYVxs625WHXzFt//UtuCjX24YBVjWMDcadAyg==
+"@trpc/client@^10.23.0":
+  version "10.23.0"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.23.0.tgz#cf1549d4c198038ae711cd1552c1d68f690d1d28"
+  integrity sha512-7hTh9OjVIx4Co3kUyIu94SjbUIuS2WKl3E5BMseYbNOHfeY5rqwkCsw0N5EHWszhIVttUMDE0oCf10tNhYEq1A==
 
-"@trpc/next@^10.22.0":
-  version "10.22.0"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.22.0.tgz#ee20cef25350ac9aa947dc1b0a755e0b29efb1eb"
-  integrity sha512-UlgeuUvws1QFXCFwNQjUcDhJrdd8sYHQVwQuuih2W+tePuq4nPTUxM2lTS3JnJf6uqgRGox4qZfzLmDVZ6vdxg==
+"@trpc/next@^10.23.0":
+  version "10.23.0"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.23.0.tgz#5031471a5012f6d67a651806adce45d6828e4fa7"
+  integrity sha512-IoyoID4wUIFI1nrx6EJM1fBVdkyLiadCsw+r3XLtKnxCwfK5PLeIwwJAQrf+4IFtQT7KYhw4dSkP4gfltIPC3Q==
   dependencies:
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react-query@^10.22.0":
-  version "10.22.0"
-  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.22.0.tgz#6a84b4f3371ab662948c7f667a44a6c66820601b"
-  integrity sha512-BxcjoyMKB+PfqjdunefI2ng1DBMa6X2/aOOc052uYdPVeYlQcH+bd7Zd0X+GvD2je+boBNY29AO77rlu1wKggQ==
+"@trpc/react-query@^10.23.0":
+  version "10.23.0"
+  resolved "https://registry.yarnpkg.com/@trpc/react-query/-/react-query-10.23.0.tgz#fa04d6fc65f14165692b5de6ffc57476926b71bd"
+  integrity sha512-50vfR3HtOEcjCQMuHSGTFOG6W9WunvcI8msTp84UNAqZ9dz4YdjgBVNn2wxqB5LAQ6AGlcKuzJWjEj3yO56tvw==
 
-"@trpc/server@^10.22.0":
-  version "10.22.0"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.22.0.tgz#63d3a265ea4f5e3bfebf8028b74ec2bbf952c498"
-  integrity sha512-je1onD7yyjJjhy9kiqMmf8TN93hhE+aWO6N3sVmQBh0Q8bCvJ4d24GdEOhI2yvj5tHTpARTvYtsZMkX9GuyTpw==
+"@trpc/server@^10.23.0":
+  version "10.23.0"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.23.0.tgz#b73c648f592a5bc88b9a2a64594ce8e952a10380"
+  integrity sha512-0CPfGZK3v3gfAL8ylV5vDJVBQtPp47EB4Vgx6WItSXmwYQlLC39ZC3gkZ4I5cGpQKl4l3QrNNeUvIcse4hlMxA==
 
 "@types/eslint@^8.21.3":
   version "8.37.0"
@@ -432,6 +432,11 @@
   dependencies:
     "@typescript-eslint/types" "5.59.1"
     eslint-visitor-keys "^3.3.0"
+
+"@vercel/analytics@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-1.0.0.tgz#7041bf3f14d65ab685f053b2fab09c605d12543e"
+  integrity sha512-RQmj7pv82JwGDHrnKeRc6TtSw2U7rWNubc2IH0ernTzWTj02yr9zvIYiYJeztsBzrJtWv7m8Nz6vxxb+cdEtJw==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
