@@ -31,9 +31,9 @@ export const Navigation: React.FC = () => {
       )}
 
       {session ? (
-        <Button onClick={() => signOut()}>Sign Out</Button>
+        <Button onClick={() => void signOut()}>Sign Out</Button>
       ) : (
-        <Button onClick={() => signIn('github')}>Sign In</Button>
+        <Button onClick={() => void signIn('github')}>Sign In</Button>
       )}
     </div>
   );

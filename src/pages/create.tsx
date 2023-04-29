@@ -35,7 +35,7 @@ const Create: React.FC = () => {
     onSuccess: () => router.push('/'),
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     mutate(values);
   };

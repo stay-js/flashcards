@@ -34,8 +34,8 @@ export const Meta: React.FC<{
     <meta property="og:description" content={desc} />
     <meta name="twitter:description" content={desc} />
 
-    <meta name="url" content={`https://flascards.znagy.hu${path}`} />
-    <meta property="og:url" content={`https://flascards.znagy.hu${path}`} />
-    <meta property="twitter:url" content={`https://flascards.znagy.hu${path}`} />
+    <meta name="url" content={`https://flashcards.znagy.hu${path}`} />
+    <meta property="og:url" content={`https://flashcards.znagy.hu${path}`} />
+    <meta property="twitter:url" content={`https://flashcards.znagy.hu${path}`} />
   </Head>
 );
