@@ -91,7 +91,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res, params }) =>
 
   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
 
-  if (!id || typeof id !== 'string') return { redirect: { destination: '/404', permanent: false } };
+  if (!id || typeof id !== 'string') return { notFound: true };
 
   try {
     const set = await prisma.set.findUnique({
@@ -102,12 +102,12 @@ export const getServerSideProps: GetServerSideProps = async ({ res, params }) =>
       },
     });
 
-    if (!set) return { redirect: { destination: '/404', permanent: false } };
+    if (!set) return { notFound: true };
 
     return { props: { set } };
   } catch (error) {
     console.error(error);
-    return { redirect: { destination: '/404', permanent: false } };
+    return { notFound: true };
   }
 };
 
