@@ -1,6 +1,6 @@
 # Flashcards App
 
-Quizlet like flashcards app with [GitHub](https://github.com) authentication, built with [t3-stack](https://create.t3.gg).
+Quizlet like Flashcards App with [GitHub](https://github.com) authentication, built with [t3-stack](https://create.t3.gg).
 
 ### Front-end:
 

@@ -6,10 +6,9 @@ import { Navigation } from '@components/Navigation';
 
 import '@styles/globals.css';
 
-const App: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => (
+const App: AppType<{
+  session: Session | null;
+}> = ({ Component, pageProps: { session, ...pageProps } }) => (
   <SessionProvider session={session}>
     <Navigation />
     <Component {...pageProps} />

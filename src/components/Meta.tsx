@@ -9,13 +9,13 @@ export const Meta: React.FC<{
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-    <meta name="author" content="stay" />
+    <meta name="author" content="Zétény Nagy" />
     <meta
       name="keywords"
       content="flashcards, flashcards app, stay, znagy, znagy.hu, quizlet, github"
     />
 
-    <meta property="og:locale" content="en" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" key="og_type" />
     <meta property="og:site_name" content="Flashcards" key="site_name" />
 
