@@ -1,4 +1,4 @@
-import type { NextPage, GetServerSideProps } from 'next';
+import type { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 import type { Set, Card, User } from '@prisma/client';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -105,10 +105,17 @@ const Page: NextPage<{
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ res, params }) => {
-  const id = params?.id;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const sets = await prisma.set.findMany({ select: { id: true } });
 
-  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59');
+  return {
+    paths: sets.map(({ id }) => ({ params: { id } })),
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params?.id;
 
   if (!id || typeof id !== 'string') return { notFound: true };
 
