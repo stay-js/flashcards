@@ -86,7 +86,7 @@ const Page: NextPage<{
             className="select-none rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
             onClick={decrementCard}
           >
-            Previous
+            Prev<span className="hidden sm:inline-block">ious</span>
           </button>
 
           <span className="text-center text-xl font-medium">
