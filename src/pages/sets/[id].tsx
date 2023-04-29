@@ -128,7 +128,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     });
 
-    return { props: { set }, revalidate: 60 };
+    return { props: { set }, revalidate: 10 };
   } catch (error) {
     console.error(error);
     return { notFound: true };
