@@ -12,7 +12,7 @@ export const Meta: React.FC<{
     <meta name="author" content="stay" />
     <meta
       name="keywords"
-      content="flashcards, flashcards app, stay, znagy, znagy.hu, quizlet, GitHub"
+      content="flashcards, flashcards app, stay, znagy, znagy.hu, quizlet, github"
     />
 
     <meta property="og:locale" content="en" />
