@@ -4,7 +4,7 @@ type Variant = 'red' | 'green' | 'blue';
 
 const computeClasses = (variant: Variant) => {
   const base =
-    'cursor-pointer whitespace-nowrap rounded border-2 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent';
+    'whitespace-nowrap rounded border-2 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent';
 
   switch (variant) {
     case 'red':
