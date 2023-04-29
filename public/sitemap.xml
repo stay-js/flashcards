@@ -9,7 +9,7 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://flashcards.znagy.hu/create</loc>
+  <loc>https://flashcards.znagy.hu/sets/create</loc>
   <priority>0.80</priority>
 </url>
 </urlset>
