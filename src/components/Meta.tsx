@@ -14,14 +14,14 @@ export const Meta: React.FC<{
 
     <meta
       name="keywords"
-      content="flashcards, flashcards app, stay, znagy, znagy.hu, quizlet, github"
+      content="flashcards, flashcards app, quizlet, github, github auth, github authentication, stay, znagy, znagy.hu"
     />
 
     <meta name="theme-color" content="#1d4ed8" />
 
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Flashcards" />
+    <meta property="og:site_name" content="Flashcards App" />
 
     <meta name="twitter:card" content="summary" />
     <meta property="twitter:domain" content="flashcards.znagy.hu" />
