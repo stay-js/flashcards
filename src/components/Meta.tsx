@@ -23,7 +23,7 @@ export const Meta: React.FC<{
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Flashcards" />
 
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
     <meta property="twitter:domain" content="flashcards.znagy.hu" />
 
     <meta name="robots" content="index, follow" />
