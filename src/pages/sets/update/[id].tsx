@@ -40,7 +40,7 @@ const Page: NextPage = () => {
       <Meta
         path={useRouter().asPath}
         title="Update Set - Flashcards"
-        desc="Update Set - Flashcards"
+        description="Update Set - Flashcards"
       />
 
       {session ? <Update session={session} /> : <SignIn />}

@@ -141,7 +141,7 @@ const Page: NextPage = () => {
 
   return (
     <>
-      <Meta path="/" title="Flashcards" desc="Flashcards App with GitHub authentication." />
+      <Meta path="/" title="Flashcards" description="Flashcards App with GitHub authentication." />
 
       {session ? <Sets /> : <SignIn />}
     </>

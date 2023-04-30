@@ -19,7 +19,11 @@ export const Error404: React.FC = () => (
 
 const Page: NextPage = () => (
   <>
-    <Meta path={useRouter().asPath} title="Not Found - Flashcards" desc="Not Found - Flashcards" />
+    <Meta
+      path={useRouter().asPath}
+      title="Not Found - Flashcards"
+      description="Not Found - Flashcards"
+    />
 
     <Error404 />
   </>

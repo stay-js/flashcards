@@ -37,7 +37,7 @@ const Page: NextPage<{
 
   return (
     <>
-      <Meta path={router.asPath} title={`${name} - Flashcards`} desc={description} />
+      <Meta path={router.asPath} title={`${name} - Flashcards`} description={description} />
 
       <main className="mx-auto flex max-w-4xl flex-col gap-4 p-6">
         <div>

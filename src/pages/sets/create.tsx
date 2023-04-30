@@ -25,7 +25,11 @@ const Page: NextPage = () => {
 
   return (
     <>
-      <Meta path="/sets/create" title="Create Set - Flashcards" desc="Create Set - Flashcards" />
+      <Meta
+        path="/sets/create"
+        title="Create Set - Flashcards"
+        description="Create Set - Flashcards"
+      />
 
       {session ? <Create /> : <SignIn />}
     </>
