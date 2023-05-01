@@ -22,81 +22,80 @@ export const setsRouter = router({
       throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
     }
   }),
-  getByID: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ ctx, input: { id } }) => {
-      try {
-        const sets = await ctx.prisma.set.findUnique({
-          where: { id },
-          include: {
-            cards: true,
-            user: true,
-          },
-        });
-        return sets;
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
-    }),
-  create: protectedProcedure
-    .input(SetSchema)
-    .mutation(async ({ ctx, input: { name, description, cards } }) => {
-      try {
-        const set = await ctx.prisma.user.update({
-          where: {
-            id: ctx.session.user.id,
-          },
-          data: {
-            sets: {
-              create: {
-                name,
-                description,
-                cards: {
-                  create: cards,
-                },
+  getByID: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
+    try {
+      const set = await ctx.prisma.set.findUnique({
+        where: {
+          id: input.id,
+        },
+        include: {
+          cards: true,
+          user: true,
+        },
+      });
+      return set;
+    } catch (error) {
+      console.error(error);
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
+    }
+  }),
+  create: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
+    try {
+      const set = await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id,
+        },
+        data: {
+          sets: {
+            create: {
+              name: input.name,
+              description: input.description,
+              cards: {
+                create: input.cards,
               },
             },
           },
-        });
-        return set;
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
-    }),
-  update: protectedProcedure
-    .input(SetSchema)
-    .mutation(async ({ ctx, input: { id, name, description, cards } }) => {
-      if (!id) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No ID' });
+        },
+      });
+      return set;
+    } catch (error) {
+      console.error(error);
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
+    }
+  }),
+  update: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
+    if (!input.id) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No ID' });
 
-      try {
-        const set = await ctx.prisma.set.findUnique({ where: { id } });
-        if (set?.userId !== ctx.session.user.id) throw new TRPCError({ code: 'UNAUTHORIZED' });
+    try {
+      const set = await ctx.prisma.set.findUnique({ where: { id: input.id } });
+      if (!set) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No set found' });
+      if (set.userId !== ctx.session.user.id) throw new TRPCError({ code: 'UNAUTHORIZED' });
 
-        await ctx.prisma.card.deleteMany({ where: { setId: id } });
+      await ctx.prisma.card.deleteMany({ where: { setId: input.id } });
 
-        const updatedSet = await ctx.prisma.set.update({
-          where: { id },
-          data: {
-            name,
-            description,
-            cards: {
-              create: cards,
-            },
+      const updatedSet = await ctx.prisma.set.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          name: input.name,
+          description: input.description,
+          cards: {
+            create: input.cards,
           },
-        });
-        return updatedSet;
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
-    }),
+        },
+      });
+      return updatedSet;
+    } catch (error) {
+      console.error(error);
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
+    }
+  }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ ctx, input: { id } }) => {
+    .mutation(async ({ ctx, input }) => {
       try {
-        const deletedSet = await ctx.prisma.set.delete({ where: { id } });
+        const deletedSet = await ctx.prisma.set.delete({ where: { id: input.id } });
         return deletedSet;
       } catch (error) {
         console.error(error);
