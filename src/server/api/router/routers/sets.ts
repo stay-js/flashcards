@@ -16,6 +16,7 @@ export const setsRouter = router({
           },
         },
       });
+
       return sets;
     } catch (error) {
       console.error(error);
@@ -33,6 +34,7 @@ export const setsRouter = router({
           user: true,
         },
       });
+
       return set;
     } catch (error) {
       console.error(error);
@@ -41,7 +43,7 @@ export const setsRouter = router({
   }),
   create: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
     try {
-      const set = await ctx.prisma.user.update({
+      await ctx.prisma.user.update({
         where: {
           id: ctx.session.user.id,
         },
@@ -57,7 +59,8 @@ export const setsRouter = router({
           },
         },
       });
-      return set;
+
+      return { message: 'Success' };
     } catch (error) {
       console.error(error);
       throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
@@ -73,7 +76,7 @@ export const setsRouter = router({
 
       await ctx.prisma.card.deleteMany({ where: { setId: input.id } });
 
-      const updatedSet = await ctx.prisma.set.update({
+      await ctx.prisma.set.update({
         where: {
           id: input.id,
         },
@@ -85,7 +88,8 @@ export const setsRouter = router({
           },
         },
       });
-      return updatedSet;
+
+      return { message: 'Success' };
     } catch (error) {
       console.error(error);
       throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
@@ -95,8 +99,9 @@ export const setsRouter = router({
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       try {
-        const deletedSet = await ctx.prisma.set.delete({ where: { id: input.id } });
-        return deletedSet;
+        await ctx.prisma.set.delete({ where: { id: input.id } });
+
+        return { message: 'Success' };
       } catch (error) {
         console.error(error);
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
