@@ -4,7 +4,7 @@ type Color = 'red' | 'green' | 'blue';
 
 const computeClasses = (color: Color) => {
   const base =
-    'whitespace-nowrap rounded border-2 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent';
+    'h-fit w-fit whitespace-nowrap rounded border-2 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent';
 
   switch (color) {
     case 'red':
