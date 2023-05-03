@@ -62,11 +62,11 @@ const Sets: React.FC = () => {
                   </div>
 
                   <div className="flex gap-2">
-                    <Button onClick={() => setSetToDelete(null)} variant="green">
+                    <Button color="green" onClick={() => setSetToDelete(null)}>
                       Cancel
                     </Button>
 
-                    <Button onClick={() => deleteSet({ id: setToDelete })} variant="red">
+                    <Button color="red" onClick={() => deleteSet({ id: setToDelete })}>
                       Delete <span className="hidden sm:inline-block">Set</span>
                     </Button>
                   </div>
@@ -120,10 +120,10 @@ const Sets: React.FC = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <Button href={`/sets/update/${id}`} variant="red">
+                  <Button color="red" href={`/sets/update/${id}`}>
                     Update <span className="hidden sm:inline-block">Set</span>
                   </Button>
-                  <Button onClick={() => setSetToDelete(id)} variant="red">
+                  <Button color="red" onClick={() => setSetToDelete(id)}>
                     Delete <span className="hidden sm:inline-block">Set</span>
                   </Button>
                 </div>

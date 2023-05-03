@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
-type Variant = 'red' | 'green' | 'blue';
+type Color = 'red' | 'green' | 'blue';
 
-const computeClasses = (variant: Variant) => {
+const computeClasses = (color: Color) => {
   const base =
     'whitespace-nowrap rounded border-2 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-transparent';
 
-  switch (variant) {
+  switch (color) {
     case 'red':
       return `${base} border-red-500 bg-red-500 hover:text-red-500`;
     case 'green':
@@ -19,20 +19,20 @@ const computeClasses = (variant: Variant) => {
 export const Button: React.FC<{
   onClick?: () => void;
   href?: string;
-  variant?: Variant;
+  color?: Color;
   type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
-}> = ({ onClick, href, variant = 'blue', type = 'button', children }) => {
+}> = ({ onClick, href, color = 'blue', type = 'button', children }) => {
   if (href) {
     return (
-      <Link className={computeClasses(variant)} href={href}>
+      <Link className={computeClasses(color)} href={href}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button type={type} className={computeClasses(variant)} onClick={onClick}>
+    <button type={type} className={computeClasses(color)} onClick={onClick}>
       {children}
     </button>
   );

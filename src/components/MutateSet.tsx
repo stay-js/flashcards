@@ -68,7 +68,7 @@ export const MutateSet: React.FC<{
 
             {index !== 0 && (
               <Button
-                variant="red"
+                color="red"
                 onClick={() =>
                   setValues({ ...values, cards: values.cards.filter((_, i) => i !== index) })
                 }
