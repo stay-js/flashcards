@@ -109,19 +109,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const sets = await prisma.set.findMany({ select: { id: true } });
 
   return {
-    paths: sets.map(({ id }) => ({ params: { id } })),
+    paths: sets.map((set) => ({ params: { id: set.id } })),
     fallback: 'blocking',
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const id = params?.id;
-
-  if (!id || typeof id !== 'string') return { notFound: true };
+  if (!params?.id || typeof params.id !== 'string') return { notFound: true };
 
   try {
     const set = await prisma.set.findUniqueOrThrow({
-      where: { id },
+      where: {
+        id: params.id,
+      },
       include: {
         user: true,
         cards: true,
