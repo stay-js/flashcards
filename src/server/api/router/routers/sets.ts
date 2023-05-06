@@ -30,69 +30,53 @@ export const setsRouter = router({
     });
   }),
   create: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
-    try {
-      await ctx.prisma.user.update({
-        where: {
-          id: ctx.session.user.id,
-        },
-        data: {
-          sets: {
-            create: {
-              name: input.name,
-              description: input.description,
-              cards: {
-                create: input.cards,
-              },
+    await ctx.prisma.user.update({
+      where: {
+        id: ctx.session.user.id,
+      },
+      data: {
+        sets: {
+          create: {
+            name: input.name,
+            description: input.description,
+            cards: {
+              create: input.cards,
             },
           },
         },
-      });
+      },
+    });
 
-      return { message: 'Success' };
-    } catch (error) {
-      console.error(error);
-      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-    }
+    return { message: 'Success' };
   }),
   update: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
     if (!input.id) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No ID' });
 
-    try {
-      const set = await ctx.prisma.set.findUnique({ where: { id: input.id } });
-      if (!set) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No set found' });
-      if (set.userId !== ctx.session.user.id) throw new TRPCError({ code: 'UNAUTHORIZED' });
+    const set = await ctx.prisma.set.findUniqueOrThrow({ where: { id: input.id } });
+    if (set.userId !== ctx.session.user.id) throw new TRPCError({ code: 'UNAUTHORIZED' });
 
-      await ctx.prisma.card.deleteMany({ where: { setId: input.id } });
+    await ctx.prisma.card.deleteMany({ where: { setId: input.id } });
 
-      await ctx.prisma.set.update({
-        where: {
-          id: input.id,
+    await ctx.prisma.set.update({
+      where: {
+        id: input.id,
+      },
+      data: {
+        name: input.name,
+        description: input.description,
+        cards: {
+          create: input.cards,
         },
-        data: {
-          name: input.name,
-          description: input.description,
-          cards: {
-            create: input.cards,
-          },
-        },
-      });
+      },
+    });
 
-      return { message: 'Success' };
-    } catch (error) {
-      console.error(error);
-      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-    }
+    return { message: 'Success' };
   }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      try {
-        await ctx.prisma.set.delete({ where: { id: input.id } });
+      await ctx.prisma.set.delete({ where: { id: input.id } });
 
-        return { message: 'Success' };
-      } catch (error) {
-        console.error(error);
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      }
+      return { message: 'Success' };
     }),
 });
