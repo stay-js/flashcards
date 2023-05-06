@@ -25,8 +25,9 @@ const emptyDefaultValues: Props = {
 
 export const MutateSet: React.FC<{
   defaultValues?: Props;
+  isMutating: boolean;
   mutate: (set: Props) => void;
-}> = ({ defaultValues, mutate }) => {
+}> = ({ defaultValues, isMutating, mutate }) => {
   const [values, setValues] = useState<Props>(defaultValues ?? emptyDefaultValues);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -38,7 +39,10 @@ export const MutateSet: React.FC<{
     <form onSubmit={handleSubmit} className="mx-auto flex max-w-2xl flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">{defaultValues ? 'Update set' : 'Create a new set'}</h1>
-        <Button type="submit">{defaultValues ? 'Save' : 'Create'}</Button>
+        <Button type="submit" disabled={isMutating}>
+          {defaultValues && (isMutating ? 'Saving...' : 'Save')}
+          {!defaultValues && (isMutating ? 'Creating...' : 'Create')}
+        </Button>
       </div>
 
       <div className="flex flex-col gap-4">

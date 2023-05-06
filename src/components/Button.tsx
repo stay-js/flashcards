@@ -21,8 +21,9 @@ export const Button: React.FC<{
   href?: string;
   color?: Color;
   type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
   children: React.ReactNode;
-}> = ({ onClick, href, color = 'blue', type = 'button', children }) => {
+}> = ({ onClick, href, color = 'blue', type = 'button', disabled, children }) => {
   if (href) {
     return (
       <Link className={computeClasses(color)} href={href}>
@@ -32,7 +33,7 @@ export const Button: React.FC<{
   }
 
   return (
-    <button type={type} className={computeClasses(color)} onClick={onClick}>
+    <button type={type} disabled={disabled} className={computeClasses(color)} onClick={onClick}>
       {children}
     </button>
   );

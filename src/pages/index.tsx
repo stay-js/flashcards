@@ -6,6 +6,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 import { TbAlertCircle } from 'react-icons/tb';
+import { toast } from 'react-hot-toast';
 import { trpc } from '@utils/trpc';
 import { Meta } from '@components/Meta';
 import { SignIn } from '@components/SignIn';
@@ -19,7 +20,8 @@ const Sets: React.FC = () => {
 
   const { mutate: deleteSet } = trpc.sets.delete.useMutation({
     onMutate: () => setSetToDelete(null),
-    onSettled: () => refetch(),
+    onSuccess: () => refetch(),
+    onError: () => toast.error('Failed to delete Set! Please try again later.'),
   });
 
   return (
