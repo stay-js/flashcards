@@ -4,42 +4,30 @@ import { router, protectedProcedure } from '../../trpc';
 import { SetSchema } from '@components/MutateSet';
 
 export const setsRouter = router({
-  getAll: protectedProcedure.query(async ({ ctx }) => {
-    try {
-      const sets = await ctx.prisma.set.findMany({
-        where: {
-          userId: ctx.session.user.id,
-        },
-        include: {
-          _count: {
-            select: { cards: true },
+  getAll: protectedProcedure.query(({ ctx }) => {
+    return ctx.prisma.set.findMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
+      include: {
+        _count: {
+          select: {
+            cards: true,
           },
         },
-      });
-
-      return sets;
-    } catch (error) {
-      console.error(error);
-      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-    }
+      },
+    });
   }),
-  getByID: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
-    try {
-      const set = await ctx.prisma.set.findUnique({
-        where: {
-          id: input.id,
-        },
-        include: {
-          cards: true,
-          user: true,
-        },
-      });
-
-      return set;
-    } catch (error) {
-      console.error(error);
-      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-    }
+  getByID: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
+    return ctx.prisma.set.findUniqueOrThrow({
+      where: {
+        id: input.id,
+      },
+      include: {
+        cards: true,
+        user: true,
+      },
+    });
   }),
   create: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
     try {

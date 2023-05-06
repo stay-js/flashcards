@@ -102,7 +102,10 @@ const Sets: React.FC = () => {
                 className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
               >
                 <div className="flex flex-col gap-3">
-                  <Link href={`/sets/${id}`} className="group flex items-center justify-between">
+                  <Link
+                    href={`/sets/${encodeURIComponent(id)}`}
+                    className="group flex items-center justify-between"
+                  >
                     <div>
                       <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
                       <h3 className="line-clamp-2">{description}</h3>
@@ -120,7 +123,7 @@ const Sets: React.FC = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <Button color="red" href={`/sets/update/${id}`}>
+                  <Button color="red" href={`/sets/update/${encodeURIComponent(id)}`}>
                     Update <span className="hidden sm:inline-block">Set</span>
                   </Button>
                   <Button color="red" onClick={() => setSetToDelete(id)}>
