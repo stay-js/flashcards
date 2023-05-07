@@ -5,13 +5,12 @@ import { useSession } from 'next-auth/react';
 import { Dialog, Transition } from '@headlessui/react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
-import { TbAlertCircle } from 'react-icons/tb';
 import { toast } from 'react-hot-toast';
 import { trpc } from '@utils/trpc';
 import { Meta } from '@components/Meta';
 import { SignIn } from '@components/SignIn';
 import { Button } from '@components/Button';
-import { Loading } from '@components/Loading';
+import { LoadingPage, ErrorPage } from '@components/States';
 
 const Sets: React.FC = () => {
   const [setToDelete, setSetToDelete] = useState<string | null>(null);
@@ -23,6 +22,9 @@ const Sets: React.FC = () => {
     onSuccess: () => refetch(),
     onError: () => toast.error('Failed to delete Set! Please try again later.'),
   });
+
+  if (isLoading) return <LoadingPage />;
+  if (isError) return <ErrorPage />;
 
   return (
     <>
@@ -80,62 +82,51 @@ const Sets: React.FC = () => {
       )}
 
       <main className="mx-auto w-fit p-6">
-        {isError && (
-          <div className="flex flex-col items-center gap-2">
-            <TbAlertCircle size={48} color="red" className="animate-bounce" />
-            Something went wrong... try again later!
-          </div>
-        )}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Link
+            href="/sets/create"
+            className="grid h-52 w-80 cursor-pointer place-items-center rounded-lg border bg-white shadow-sm"
+          >
+            <FiPlus size={48} />
+          </Link>
 
-        {isLoading && <Loading />}
-
-        {!isError && sets && (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Link
-              href="/sets/create"
-              className="grid h-52 w-80 cursor-pointer place-items-center rounded-lg border bg-white shadow-sm"
+          {sets?.map(({ id, name, description, _count: { cards } }) => (
+            <div
+              key={id}
+              className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
             >
-              <FiPlus size={48} />
-            </Link>
-
-            {sets.map(({ id, name, description, _count: { cards } }) => (
-              <div
-                key={id}
-                className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
-              >
-                <div className="flex flex-col gap-3">
-                  <Link
-                    href={`/sets/${encodeURIComponent(id)}`}
-                    className="group flex items-center justify-between"
-                  >
-                    <div>
-                      <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
-                      <h3 className="line-clamp-2">{description}</h3>
-                    </div>
-
-                    <FaExternalLinkAlt
-                      className="text-transparent transition-all duration-200 group-hover:text-black"
-                      size={20}
-                    />
-                  </Link>
-
-                  <div className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5">
-                    <span className="text-xs font-medium text-gray-800">{cards} cards</span>
+              <div className="flex flex-col gap-3">
+                <Link
+                  href={`/sets/${encodeURIComponent(id)}`}
+                  className="group flex items-center justify-between"
+                >
+                  <div>
+                    <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
+                    <h3 className="line-clamp-2">{description}</h3>
                   </div>
-                </div>
 
-                <div className="flex gap-2">
-                  <Button color="red" href={`/sets/update/${encodeURIComponent(id)}`}>
-                    Update <span className="hidden sm:inline-block">Set</span>
-                  </Button>
-                  <Button color="red" onClick={() => setSetToDelete(id)}>
-                    Delete <span className="hidden sm:inline-block">Set</span>
-                  </Button>
+                  <FaExternalLinkAlt
+                    className="text-transparent transition-all duration-200 group-hover:text-black"
+                    size={20}
+                  />
+                </Link>
+
+                <div className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5">
+                  <span className="text-xs font-medium text-gray-800">{cards} cards</span>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+
+              <div className="flex gap-2">
+                <Button color="red" href={`/sets/update/${encodeURIComponent(id)}`}>
+                  Update <span className="hidden sm:inline-block">Set</span>
+                </Button>
+                <Button color="red" onClick={() => setSetToDelete(id)}>
+                  Delete <span className="hidden sm:inline-block">Set</span>
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
       </main>
     </>
   );

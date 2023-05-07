@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Meta } from '@components/Meta';
 import { Button } from '@components/Button';
 
-export const Error404: React.FC = () => (
+export const FourOhFourPage: React.FC = () => (
   <main className="flex flex-col items-center gap-12 py-20">
     <div className="flex flex-col items-center gap-2">
       <h1 className="text-regale-gray text-9xl font-bold">404</h1>
@@ -25,7 +25,7 @@ const Page: NextPage = () => (
       description="Not Found - Flashcards"
     />
 
-    <Error404 />
+    <FourOhFourPage />
   </>
 );
 

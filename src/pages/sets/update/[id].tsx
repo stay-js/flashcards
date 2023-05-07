@@ -7,8 +7,8 @@ import { trpc } from '@utils/trpc';
 import { Meta } from '@components/Meta';
 import { SignIn } from '@components/SignIn';
 import { MutateSet } from '@components/MutateSet';
-import { Error404 } from '@pages/404';
-import { Loading } from '@components/Loading';
+import { FourOhFourPage } from '@pages/404';
+import { LoadingPage } from '@components/States';
 
 const Update: React.FC<{ session: Session }> = ({ session }) => {
   const router = useRouter();
@@ -20,16 +20,17 @@ const Update: React.FC<{ session: Session }> = ({ session }) => {
     onError: () => toast.error('Failed to update Set! Please try again later.'),
   });
 
-  if (!id || typeof id !== 'string') return <Error404 />;
+  if (!id || typeof id !== 'string') return <FourOhFourPage />;
 
   const { data: set, isLoading } = trpc.sets.getByID.useQuery({ id });
 
-  if (!isLoading && (!set || session.user?.id !== set.userId)) return <Error404 />;
+  if (isLoading) return <LoadingPage />;
+
+  if (!set || session.user?.id !== set.userId) return <FourOhFourPage />;
 
   return (
     <main className="p-6">
-      {isLoading && <Loading />}
-      {set && <MutateSet defaultValues={set} mutate={mutate} isMutating={isMutating} />}
+      <MutateSet defaultValues={set} mutate={mutate} isMutating={isMutating} />
     </main>
   );
 };

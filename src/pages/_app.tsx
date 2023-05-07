@@ -14,6 +14,7 @@ const App: AppType<{
   <SessionProvider session={session}>
     <Analytics />
     <Toaster toastOptions={{ duration: 2000 }} />
+
     <Navigation />
     <Component {...pageProps} />
   </SessionProvider>
