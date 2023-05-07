@@ -4,9 +4,9 @@ import { TextInput, Textarea } from '@components/Input';
 import { Button } from '@components/Button';
 
 export const SetSchema = z.object({
-  name: z.string().max(50),
-  description: z.string().max(200),
-  cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })),
+  name: z.string().min(1).max(50),
+  description: z.string().min(1).max(200),
+  cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })).min(1),
   id: z.string().optional(),
 });
 
