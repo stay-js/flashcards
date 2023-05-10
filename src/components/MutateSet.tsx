@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { TextInput, Textarea } from '@components/Input';
 import { Button } from '@components/Button';
@@ -13,19 +11,31 @@ export const setSchema = z.object({
 
 type SetSchema = z.infer<typeof setSchema>;
 
+const emptyDefaultValues: SetSchema = {
+  name: '',
+  description: '',
+  cards: [
+    {
+      front: '',
+      back: '',
+    },
+  ],
+};
+
 export const MutateSet: React.FC<{
   defaultValues?: SetSchema;
   isMutating: boolean;
   mutate: (set: SetSchema) => void;
 }> = ({ defaultValues, isMutating, mutate }) => {
-  const [cards, setCards] = useState<number[]>(
-    Array.from(Array(defaultValues?.cards.length || 1).keys()),
-  );
+  const [values, setValues] = useState<SetSchema>(defaultValues ?? emptyDefaultValues);
 
-  const { register, handleSubmit } = useForm<SetSchema>({ resolver: zodResolver(setSchema) });
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    mutate(values);
+  };
 
   return (
-    <form onSubmit={handleSubmit(mutate)} className="mx-auto flex max-w-2xl flex-col gap-6">
+    <form onSubmit={handleSubmit} className="mx-auto flex max-w-2xl flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">{defaultValues ? 'Update set' : 'Create a new set'}</h1>
         <Button type="submit" disabled={isMutating}>
@@ -39,9 +49,9 @@ export const MutateSet: React.FC<{
           required
           label="Name:"
           placeholder="Please provide a name for this set!"
+          value={values.name}
           maxLength={50}
-          defaultValue={defaultValues?.name ?? ''}
-          {...register('name')}
+          onChange={(e) => setValues({ ...values, name: e.target.value })}
         />
 
         <Textarea
@@ -49,12 +59,12 @@ export const MutateSet: React.FC<{
           placeholder="Please provide a description for this set!"
           rows={4}
           maxLength={200}
-          defaultValue={defaultValues?.description ?? ''}
-          {...register('description')}
+          value={values.description}
+          onChange={(e) => setValues({ ...values, description: e.target.value })}
         />
       </div>
 
-      {cards.map((index) => (
+      {values.cards.map((card, index) => (
         <div key={index}>
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">{index + 1}. Card</h2>
@@ -62,7 +72,9 @@ export const MutateSet: React.FC<{
             {index !== 0 && (
               <Button
                 color="red"
-                onClick={() => setCards((value) => value.filter((_, i) => i !== index))}
+                onClick={() =>
+                  setValues({ ...values, cards: values.cards.filter((_, i) => i !== index) })
+                }
               >
                 Delete
               </Button>
@@ -76,8 +88,15 @@ export const MutateSet: React.FC<{
               placeholder="Please provide a front for this card!"
               rows={3}
               maxLength={200}
-              defaultValue={defaultValues?.cards?.[index]?.front ?? ''}
-              {...register(`cards.${index}.front`)}
+              value={card.front}
+              onChange={(e) =>
+                setValues({
+                  ...values,
+                  cards: values.cards.map((c, i) =>
+                    i === index ? { ...c, front: e.target.value } : c,
+                  ),
+                })
+              }
             />
 
             <Textarea
@@ -86,14 +105,25 @@ export const MutateSet: React.FC<{
               placeholder="Please provide a back for this card!"
               rows={4}
               maxLength={500}
-              defaultValue={defaultValues?.cards?.[index]?.back ?? ''}
-              {...register(`cards.${index}.back`)}
+              value={card.back}
+              onChange={(e) =>
+                setValues({
+                  ...values,
+                  cards: values.cards.map((c, i) =>
+                    i === index ? { ...c, back: e.target.value } : c,
+                  ),
+                })
+              }
             />
           </div>
         </div>
       ))}
 
-      <Button onClick={() => setCards((value) => [...value, value.length])}>Add card</Button>
+      <Button
+        onClick={() => setValues({ ...values, cards: [...values.cards, { front: '', back: '' }] })}
+      >
+        Add card
+      </Button>
     </form>
   );
 };
