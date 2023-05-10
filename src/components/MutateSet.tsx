@@ -9,7 +9,6 @@ export const setSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(200),
   cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })).min(1),
-  id: z.string().optional(),
 });
 
 type SetSchema = z.infer<typeof setSchema>;
@@ -19,15 +18,12 @@ export const MutateSet: React.FC<{
   isMutating: boolean;
   mutate: (set: SetSchema) => void;
 }> = ({ defaultValues, isMutating, mutate }) => {
-  const [cards, setCards] = useState(Array.from(Array(defaultValues?.cards.length ?? 1).keys()));
+  const [cards, setCards] = useState(Array.from(Array(defaultValues?.cards.length || 1).keys()));
 
   const { register, handleSubmit } = useForm<SetSchema>({ resolver: zodResolver(setSchema) });
 
   return (
-    <form
-      onSubmit={handleSubmit((data) => mutate({ ...data, id: defaultValues?.id }))}
-      className="mx-auto flex max-w-2xl flex-col gap-6"
-    >
+    <form onSubmit={handleSubmit(mutate)} className="mx-auto flex max-w-2xl flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">{defaultValues ? 'Update set' : 'Create a new set'}</h1>
         <Button type="submit" disabled={isMutating}>

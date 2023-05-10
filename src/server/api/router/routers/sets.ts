@@ -33,7 +33,7 @@ export const setsRouter = router({
       },
     });
   }),
-  create: protectedProcedure.input(setSchemaWithID).mutation(async ({ ctx, input }) => {
+  create: protectedProcedure.input(setSchema).mutation(async ({ ctx, input }) => {
     await ctx.prisma.user.update({
       where: {
         id: ctx.session.user.id,

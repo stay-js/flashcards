@@ -30,7 +30,11 @@ const Update: React.FC<{ session: Session }> = ({ session }) => {
 
   return (
     <main className="p-6">
-      <MutateSet defaultValues={set} mutate={mutate} isMutating={isMutating} />
+      <MutateSet
+        defaultValues={set}
+        mutate={(data) => mutate({ ...data, id })}
+        isMutating={isMutating}
+      />
     </main>
   );
 };
