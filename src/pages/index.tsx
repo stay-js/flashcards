@@ -17,7 +17,7 @@ const Sets: React.FC = () => {
 
   const { data: sets, isLoading, isError, refetch } = trpc.sets.getAll.useQuery();
 
-  const { mutate: deleteSet } = trpc.sets.delete.useMutation({
+  const { mutate: deleteSet, isLoading: isDeleting } = trpc.sets.delete.useMutation({
     onMutate: () => setSetToDelete(null),
     onSuccess: () => refetch(),
     onError: () => toast.error('Failed to delete Set! Please try again later.'),
@@ -28,58 +28,56 @@ const Sets: React.FC = () => {
 
   return (
     <>
-      {setToDelete && (
-        <Transition appear show as={Fragment}>
-          <Dialog as="div" className="relative z-50" onClose={() => setSetToDelete(null)}>
+      <Transition appear show={!!setToDelete} as={Fragment}>
+        <Dialog as="div" className="relative z-50" onClose={() => setSetToDelete(null)}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-50" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 grid place-items-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
               leave="ease-in duration-200"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
             >
-              <div className="fixed inset-0 bg-black bg-opacity-50" />
+              <Dialog.Panel className="flex w-11/12 max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-xl">
+                <div className="flex flex-col gap-2">
+                  <Dialog.Title className="text-lg font-bold text-neutral-900">
+                    Delete Set
+                  </Dialog.Title>
+
+                  <Dialog.Description className="m-0 text-sm text-neutral-500">
+                    Are you sure you want to delete this Set? This action <b>cannot be undone</b>.
+                    This will <b>permanently</b> delete the selected Set.
+                  </Dialog.Description>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button color="green" onClick={() => setSetToDelete(null)}>
+                    Cancel
+                  </Button>
+
+                  <Button color="red" onClick={() => setToDelete && deleteSet({ id: setToDelete })}>
+                    {isDeleting ? 'Deleting...' : 'Delete'}
+                  </Button>
+                </div>
+              </Dialog.Panel>
             </Transition.Child>
-
-            <div className="fixed inset-0 grid place-items-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="flex w-11/12 max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-xl">
-                  <div className="flex flex-col gap-2">
-                    <Dialog.Title className="text-lg font-bold text-neutral-900">
-                      Delete Set
-                    </Dialog.Title>
-
-                    <Dialog.Description className="m-0 text-sm text-neutral-500">
-                      Are you sure you want to delete this Set? This action <b>cannot be undone</b>.
-                      This will <b>permanently</b> delete the selected Set.
-                    </Dialog.Description>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <Button color="green" onClick={() => setSetToDelete(null)}>
-                      Cancel
-                    </Button>
-
-                    <Button color="red" onClick={() => deleteSet({ id: setToDelete })}>
-                      Delete <span className="hidden sm:inline-block">Set</span>
-                    </Button>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </Dialog>
-        </Transition>
-      )}
+          </div>
+        </Dialog>
+      </Transition>
 
       <main className="mx-auto w-fit p-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
