@@ -1,7 +1,11 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { router, protectedProcedure } from '../../trpc';
-import { SetSchema } from '@components/MutateSet';
+import { setSchema } from '@components/MutateSet';
+
+const setSchemaWithID = setSchema.extend({
+  id: z.string(),
+});
 
 export const setsRouter = router({
   getAll: protectedProcedure.query(({ ctx }) => {
@@ -29,7 +33,7 @@ export const setsRouter = router({
       },
     });
   }),
-  create: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
+  create: protectedProcedure.input(setSchemaWithID).mutation(async ({ ctx, input }) => {
     await ctx.prisma.user.update({
       where: {
         id: ctx.session.user.id,
@@ -49,7 +53,7 @@ export const setsRouter = router({
 
     return { message: 'Success' };
   }),
-  update: protectedProcedure.input(SetSchema).mutation(async ({ ctx, input }) => {
+  update: protectedProcedure.input(setSchemaWithID).mutation(async ({ ctx, input }) => {
     if (!input.id) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No ID' });
 
     const set = await ctx.prisma.set.findUniqueOrThrow({ where: { id: input.id } });

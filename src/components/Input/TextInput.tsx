@@ -1,14 +1,13 @@
-import { useId } from 'react';
+import type { Ref } from 'react';
+import { forwardRef, useId } from 'react';
 
 export const TextInput: React.FC<{
   required?: boolean;
   label?: string;
   placeholder?: string;
-  value: string | string[] | undefined;
-  error?: string;
   maxLength?: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}> = ({ required, label, placeholder, value, error, maxLength, onChange }) => {
+  defaultValue?: string;
+}> = forwardRef(({ required, label, placeholder, maxLength, defaultValue, ...props }, ref) => {
   const id = useId();
 
   return (
@@ -25,12 +24,13 @@ export const TextInput: React.FC<{
         type="text"
         id={id}
         placeholder={placeholder}
-        value={value}
         maxLength={maxLength}
-        onChange={onChange}
+        defaultValue={defaultValue}
+        ref={ref as Ref<HTMLInputElement>}
+        {...props}
       />
-
-      {error && <p className="mb-0 text-xs text-red-500">{error}</p>}
     </div>
   );
-};
+});
+
+TextInput.displayName = 'TextInput';

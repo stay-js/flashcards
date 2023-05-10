@@ -1,42 +1,33 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { TextInput, Textarea } from '@components/Input';
 import { Button } from '@components/Button';
 
-export const SetSchema = z.object({
+export const setSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(200),
   cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })).min(1),
   id: z.string().optional(),
 });
 
-type Props = z.infer<typeof SetSchema>;
-
-const emptyDefaultValues: Props = {
-  name: '',
-  description: '',
-  cards: [
-    {
-      front: '',
-      back: '',
-    },
-  ],
-};
+type SetSchema = z.infer<typeof setSchema>;
 
 export const MutateSet: React.FC<{
-  defaultValues?: Props;
+  defaultValues?: SetSchema;
   isMutating: boolean;
-  mutate: (set: Props) => void;
+  mutate: (set: SetSchema) => void;
 }> = ({ defaultValues, isMutating, mutate }) => {
-  const [values, setValues] = useState<Props>(defaultValues ?? emptyDefaultValues);
+  const [cards, setCards] = useState(Array.from(Array(defaultValues?.cards.length ?? 1).keys()));
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    mutate(values);
-  };
+  const { register, handleSubmit } = useForm<SetSchema>({ resolver: zodResolver(setSchema) });
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto flex max-w-2xl flex-col gap-6">
+    <form
+      onSubmit={handleSubmit((data) => mutate({ ...data, id: defaultValues?.id }))}
+      className="mx-auto flex max-w-2xl flex-col gap-6"
+    >
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">{defaultValues ? 'Update set' : 'Create a new set'}</h1>
         <Button type="submit" disabled={isMutating}>
@@ -50,9 +41,9 @@ export const MutateSet: React.FC<{
           required
           label="Name:"
           placeholder="Please provide a name for this set!"
-          value={values.name}
           maxLength={50}
-          onChange={(e) => setValues({ ...values, name: e.target.value })}
+          defaultValue={defaultValues?.name ?? ''}
+          {...register('name')}
         />
 
         <Textarea
@@ -60,12 +51,12 @@ export const MutateSet: React.FC<{
           placeholder="Please provide a description for this set!"
           rows={4}
           maxLength={200}
-          value={values.description}
-          onChange={(e) => setValues({ ...values, description: e.target.value })}
+          defaultValue={defaultValues?.description ?? ''}
+          {...register('description')}
         />
       </div>
 
-      {values.cards.map((card, index) => (
+      {cards.map((index) => (
         <div key={index}>
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">{index + 1}. Card</h2>
@@ -73,9 +64,7 @@ export const MutateSet: React.FC<{
             {index !== 0 && (
               <Button
                 color="red"
-                onClick={() =>
-                  setValues({ ...values, cards: values.cards.filter((_, i) => i !== index) })
-                }
+                onClick={() => setCards((value) => value.filter((_, i) => i !== index))}
               >
                 Delete
               </Button>
@@ -89,15 +78,8 @@ export const MutateSet: React.FC<{
               placeholder="Please provide a front for this card!"
               rows={3}
               maxLength={200}
-              value={card.front}
-              onChange={(e) =>
-                setValues({
-                  ...values,
-                  cards: values.cards.map((c, i) =>
-                    i === index ? { ...c, front: e.target.value } : c,
-                  ),
-                })
-              }
+              defaultValue={defaultValues?.cards?.[index]?.front ?? ''}
+              {...register(`cards.${index}.front`)}
             />
 
             <Textarea
@@ -106,25 +88,14 @@ export const MutateSet: React.FC<{
               placeholder="Please provide a back for this card!"
               rows={4}
               maxLength={500}
-              value={card.back}
-              onChange={(e) =>
-                setValues({
-                  ...values,
-                  cards: values.cards.map((c, i) =>
-                    i === index ? { ...c, back: e.target.value } : c,
-                  ),
-                })
-              }
+              defaultValue={defaultValues?.cards?.[index]?.back ?? ''}
+              {...register(`cards.${index}.back`)}
             />
           </div>
         </div>
       ))}
 
-      <Button
-        onClick={() => setValues({ ...values, cards: [...values.cards, { front: '', back: '' }] })}
-      >
-        Add card
-      </Button>
+      <Button onClick={() => setCards((value) => [...value, value.length])}>Add card</Button>
     </form>
   );
 };
