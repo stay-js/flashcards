@@ -18,7 +18,9 @@ export const MutateSet: React.FC<{
   isMutating: boolean;
   mutate: (set: SetSchema) => void;
 }> = ({ defaultValues, isMutating, mutate }) => {
-  const [cards, setCards] = useState(Array.from(Array(defaultValues?.cards.length || 1).keys()));
+  const [cards, setCards] = useState<number[]>(
+    Array.from(Array(defaultValues?.cards.length || 1).keys()),
+  );
 
   const { register, handleSubmit } = useForm<SetSchema>({ resolver: zodResolver(setSchema) });
 
