@@ -14,12 +14,7 @@ type SetSchema = z.infer<typeof setSchema>;
 const emptyDefaultValues: SetSchema = {
   name: '',
   description: '',
-  cards: [
-    {
-      front: '',
-      back: '',
-    },
-  ],
+  cards: [{ front: '', back: '' }],
 };
 
 export const MutateSet: React.FC<{
@@ -29,13 +24,14 @@ export const MutateSet: React.FC<{
 }> = ({ defaultValues, isMutating, mutate }) => {
   const [values, setValues] = useState<SetSchema>(defaultValues ?? emptyDefaultValues);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    mutate(values);
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="mx-auto flex max-w-2xl flex-col gap-6">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        mutate(values);
+      }}
+      className="mx-auto flex max-w-2xl flex-col gap-6"
+    >
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">{defaultValues ? 'Update set' : 'Create a new set'}</h1>
         <Button type="submit" disabled={isMutating}>
@@ -69,12 +65,15 @@ export const MutateSet: React.FC<{
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">{index + 1}. Card</h2>
 
-            {index !== 0 && (
+            {values.cards.length !== 1 && (
               <Button
                 color="red"
-                onClick={() =>
-                  setValues({ ...values, cards: values.cards.filter((_, i) => i !== index) })
-                }
+                onClick={() => {
+                  setValues((prev) => ({
+                    ...prev,
+                    cards: prev.cards.filter((_, i) => i !== index),
+                  }));
+                }}
               >
                 Delete
               </Button>
@@ -89,14 +88,14 @@ export const MutateSet: React.FC<{
               rows={3}
               maxLength={200}
               value={card.front}
-              onChange={(e) =>
-                setValues({
-                  ...values,
-                  cards: values.cards.map((c, i) =>
+              onChange={(e) => {
+                setValues((prev) => ({
+                  ...prev,
+                  cards: prev.cards.map((c, i) =>
                     i === index ? { ...c, front: e.target.value } : c,
                   ),
-                })
-              }
+                }));
+              }}
             />
 
             <Textarea
@@ -106,21 +105,23 @@ export const MutateSet: React.FC<{
               rows={4}
               maxLength={500}
               value={card.back}
-              onChange={(e) =>
-                setValues({
-                  ...values,
-                  cards: values.cards.map((c, i) =>
+              onChange={(e) => {
+                setValues((prev) => ({
+                  ...prev,
+                  cards: prev.cards.map((c, i) =>
                     i === index ? { ...c, back: e.target.value } : c,
                   ),
-                })
-              }
+                }));
+              }}
             />
           </div>
         </div>
       ))}
 
       <Button
-        onClick={() => setValues({ ...values, cards: [...values.cards, { front: '', back: '' }] })}
+        onClick={() => {
+          setValues((prev) => ({ ...prev, cards: [...prev.cards, { front: '', back: '' }] }));
+        }}
       >
         Add card
       </Button>

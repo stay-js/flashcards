@@ -3,10 +3,6 @@ import { z } from 'zod';
 import { router, protectedProcedure } from '../../trpc';
 import { setSchema } from '@components/MutateSet';
 
-const setSchemaWithID = setSchema.extend({
-  id: z.string(),
-});
-
 export const setsRouter = router({
   getAll: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.set.findMany({
@@ -53,29 +49,31 @@ export const setsRouter = router({
 
     return { message: 'Success' };
   }),
-  update: protectedProcedure.input(setSchemaWithID).mutation(async ({ ctx, input }) => {
-    if (!input.id) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No ID' });
+  update: protectedProcedure
+    .input(setSchema.extend({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      if (!input.id) throw new TRPCError({ code: 'BAD_REQUEST', cause: 'No ID' });
 
-    const set = await ctx.prisma.set.findUniqueOrThrow({ where: { id: input.id } });
-    if (set.userId !== ctx.session.user.id) throw new TRPCError({ code: 'UNAUTHORIZED' });
+      const set = await ctx.prisma.set.findUniqueOrThrow({ where: { id: input.id } });
+      if (set.userId !== ctx.session.user.id) throw new TRPCError({ code: 'UNAUTHORIZED' });
 
-    await ctx.prisma.card.deleteMany({ where: { setId: input.id } });
+      await ctx.prisma.card.deleteMany({ where: { setId: input.id } });
 
-    await ctx.prisma.set.update({
-      where: {
-        id: input.id,
-      },
-      data: {
-        name: input.name,
-        description: input.description,
-        cards: {
-          create: input.cards,
+      await ctx.prisma.set.update({
+        where: {
+          id: input.id,
         },
-      },
-    });
+        data: {
+          name: input.name,
+          description: input.description,
+          cards: {
+            create: input.cards,
+          },
+        },
+      });
 
-    return { message: 'Success' };
-  }),
+      return { message: 'Success' };
+    }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
