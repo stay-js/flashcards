@@ -16,3 +16,11 @@ Quizlet like Flashcards App with [GitHub](https://github.com) authentication, bu
 - [NextAuth.js](https://next-auth.js.org)
 - [PlanetScale (MySQL)](https://planetscale.com)
 - [Prisma](https://prisma.io)
+
+## Todo
+
+- [ ] Migrate to Next.js App Router
+- [ ] Add categories
+- [ ] Add search
+- [ ] Add pagination
+- [ ] Add visibility (public/private)
