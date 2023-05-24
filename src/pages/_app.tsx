@@ -3,10 +3,10 @@ import type { AppType } from 'next/dist/shared/lib/utils';
 import { SessionProvider } from 'next-auth/react';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'react-hot-toast';
-import { trpc } from '@utils/trpc';
-import { Navigation } from '@components/Navigation';
+import { trpc } from '~/utils/trpc';
+import { Navigation } from '~/components/Navigation';
 
-import '@styles/globals.css';
+import '~/styles/globals.css';
 
 const App: AppType<{
   session: Session | null;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { z } from 'zod';
-import { TextInput, Textarea } from '@components/Input';
-import { Button } from '@components/Button';
+import { TextInput, Textarea } from '~/components/input';
+import { Button } from '~/components/button';
 
 export const setSchema = z.object({
   name: z.string().min(1).max(50),

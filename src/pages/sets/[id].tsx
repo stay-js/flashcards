@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, Fragment } from 'react';
 import { Transition } from '@headlessui/react';
-import { prisma } from '@server/db';
-import { Meta } from '@components/Meta';
+import { prisma } from '~/server/db';
+import { Meta } from '~/components/meta';
 
 const Page: NextPage<{
   set: Set & {

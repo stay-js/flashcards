@@ -6,11 +6,11 @@ import { Dialog, Transition } from '@headlessui/react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
-import { trpc } from '@utils/trpc';
-import { Meta } from '@components/Meta';
-import { SignIn } from '@components/SignIn';
-import { Button } from '@components/Button';
-import { LoadingPage, ErrorPage } from '@components/States';
+import { trpc } from '~/utils/trpc';
+import { Meta } from '~/components/meta';
+import { SignIn } from '~/components/sign-in';
+import { Button } from '~/components/button';
+import { LoadingPage, ErrorPage } from '~/components/states';
 
 const Sets: React.FC = () => {
   const [setToDelete, setSetToDelete] = useState<string | null>(null);

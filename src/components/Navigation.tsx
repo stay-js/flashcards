@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signOut, signIn, useSession } from 'next-auth/react';
-import { Button } from '@components/Button';
+import { Button } from '~/components/button';
 
 export const Navigation: React.FC = () => {
   const { data: session } = useSession();

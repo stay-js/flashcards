@@ -1,4 +1,4 @@
-import { Textarea } from './Textarea';
-import { TextInput } from './TextInput';
+import { Textarea } from './textarea';
+import { TextInput } from './input';
 
 export { Textarea, TextInput };

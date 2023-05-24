@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import { router, protectedProcedure } from '../../trpc';
-import { setSchema } from '@components/MutateSet';
+import { setSchema } from '~/components/mutate-set';
 
 export const setsRouter = router({
   getAll: protectedProcedure.query(({ ctx }) => {
