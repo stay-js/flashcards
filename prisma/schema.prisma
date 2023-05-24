@@ -11,14 +11,20 @@ datasource db {
     relationMode = "prisma"
 }
 
+enum Visibility {
+    PUBLIC
+    PRIVATE
+}
+
 model Set {
-    id          String   @id @default(cuid())
-    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id          String     @id @default(cuid())
+    user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId      String
-    name        String   @db.VarChar(50)
-    description String   @db.VarChar(200)
+    name        String     @db.VarChar(50)
+    description String     @db.VarChar(200)
+    visibility  Visibility
     cards       Card[]
-    createdAt   DateTime @default(now())
+    createdAt   DateTime   @default(now())
 
     @@index([userId])
 }

@@ -19,7 +19,6 @@ Quizlet like Flashcards App with [GitHub](https://github.com) authentication, bu
 
 ## Todo
 
-- [ ] Migrate to Next.js App Router
 - [ ] Add categories
 - [ ] Add search
 - [ ] Add pagination

@@ -39,6 +39,7 @@ export const setsRouter = router({
           create: {
             name: input.name,
             description: input.description,
+            visibility: input.visibility,
             cards: {
               create: input.cards,
             },
