@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { z } from 'zod';
-import { TextInput, Textarea } from '~/components/input';
+import { Select, Input, Textarea } from '~/components/input';
 import { Button } from '~/components/button';
 
 export const setSchema = z.object({
@@ -42,8 +42,20 @@ export const MutateSet: React.FC<{
         </Button>
       </div>
 
+      <Select
+        label="Visibility:"
+        value={values.visibility}
+        onChange={(e) =>
+          setValues({ ...values, visibility: e.target.value as 'PUBLIC' | 'PRIVATE' })
+        }
+        options={[
+          { label: 'Private', value: 'PRIVATE' },
+          { label: 'Public', value: 'PUBLIC' },
+        ]}
+      />
+
       <div className="flex flex-col gap-4">
-        <TextInput
+        <Input
           required
           label="Name:"
           placeholder="Please provide a name for this set!"

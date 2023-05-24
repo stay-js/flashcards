@@ -1,4 +1,3 @@
-import { Textarea } from './textarea';
-import { TextInput } from './input';
-
-export { Textarea, TextInput };
+export * from './input';
+export * from './select';
+export * from './textarea';

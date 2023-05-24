@@ -1,6 +1,6 @@
 import { useId } from 'react';
 
-export const TextInput: React.FC<{
+export const Input: React.FC<{
   required?: boolean;
   label?: string;
   placeholder?: string;
