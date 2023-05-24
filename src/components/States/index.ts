@@ -1,4 +1,4 @@
-import { Error, ErrorPage } from './Error';
-import { LoadingSpinner, LoadingPage } from './Loading';
+import { Error, ErrorPage } from './error';
+import { LoadingSpinner, LoadingPage } from './loading';
 
 export { Error, ErrorPage, LoadingSpinner, LoadingPage };
