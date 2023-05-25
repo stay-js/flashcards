@@ -19,7 +19,7 @@ Quizlet like Flashcards App with [GitHub](https://github.com) authentication, bu
 
 ## Todo
 
-- [ ] Add categories
 - [ ] Add search
+- [ ] Add filter by category
+- [ ] Prefetch sets
 - [ ] Add pagination
-- [ ] Add visibility (public/private)
