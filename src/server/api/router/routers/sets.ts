@@ -4,21 +4,28 @@ import { router, publicProcedure, protectedProcedure } from '../../trpc';
 import { setSchema } from '~/components/mutate-set';
 
 export const setsRouter = router({
-  getAllPublic: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.set.findMany({
-      where: {
-        visibility: 'PUBLIC',
-      },
-      include: {
-        _count: {
-          select: {
-            cards: true,
+  getAllPublic: publicProcedure
+    .input(z.object({ query: z.string().nullable() }))
+    .query(({ ctx, input }) => {
+      const query = input.query
+        ? {
+            visibility: 'PUBLIC' as const,
+            name: { contains: input.query },
+          }
+        : { visibility: 'PUBLIC' as const };
+
+      return ctx.prisma.set.findMany({
+        where: query,
+        include: {
+          _count: {
+            select: {
+              cards: true,
+            },
           },
         },
-      },
-    });
-  }),
-  getAllByUser: protectedProcedure.query(({ ctx }) => {
+      });
+    }),
+  getAllBySessionUser: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.set.findMany({
       where: {
         userId: ctx.session.user.id,
@@ -32,7 +39,7 @@ export const setsRouter = router({
       },
     });
   }),
-  getByID: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
+  getByID: publicProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
     return ctx.prisma.set.findUniqueOrThrow({
       where: {
         id: input.id,

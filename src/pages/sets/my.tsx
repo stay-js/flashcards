@@ -16,7 +16,7 @@ import { LoadingPage, ErrorPage } from '~/components/states';
 const Sets: React.FC = () => {
   const [setToDelete, setSetToDelete] = useState<string | null>(null);
 
-  const { data: sets, isLoading, isError, refetch } = trpc.sets.getAllByUser.useQuery();
+  const { data: sets, isLoading, isError, refetch } = trpc.sets.getAllBySessionUser.useQuery();
 
   const { mutate: deleteSet, isLoading: isDeleting } = trpc.sets.delete.useMutation({
     onMutate: () => setSetToDelete(null),
@@ -94,11 +94,8 @@ const Sets: React.FC = () => {
               key={id}
               className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
             >
-              <div className="flex flex-col gap-3">
-                <Link
-                  href={`/sets/${encodeURIComponent(id)}`}
-                  className="group flex items-center justify-between"
-                >
+              <Link href={`/sets/${encodeURIComponent(id)}`} className="flex h-full flex-col gap-3">
+                <div className="flex items-center justify-between">
                   <div>
                     <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
                     <h3 className="line-clamp-2">{description}</h3>
@@ -108,7 +105,7 @@ const Sets: React.FC = () => {
                     className="text-transparent transition-all duration-200 group-hover:text-black"
                     size={20}
                   />
-                </Link>
+                </div>
 
                 <div className="flex gap-2">
                   <span className="flex w-fit items-center rounded-full bg-gray-200 px-3 py-1.5 ">
@@ -123,7 +120,7 @@ const Sets: React.FC = () => {
                     {category}
                   </span>
                 </div>
-              </div>
+              </Link>
 
               <div className="flex gap-2">
                 <Button color="red" href={`/sets/update/${encodeURIComponent(id)}`}>
