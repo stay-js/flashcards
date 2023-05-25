@@ -11,7 +11,7 @@ const Create: React.FC = () => {
   const router = useRouter();
 
   const { mutate, isLoading: isMutating } = trpc.sets.create.useMutation({
-    onSuccess: () => router.push('/'),
+    onSuccess: () => router.push('/sets/my'),
     onError: () => toast.error('Failed to create Set! Please try again later.'),
   });
 

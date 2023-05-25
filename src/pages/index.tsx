@@ -1,15 +1,19 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Link from 'next/link';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { TbLock, TbWorld } from 'react-icons/tb';
 import { trpc } from '~/utils/trpc';
 import { Meta } from '~/components/meta';
-import { LoadingPage, ErrorPage } from '~/components/states';
+import { ErrorPage } from '~/components/states';
+
+import { createServerSideHelpers } from '@trpc/react-query/server';
+import { appRouter } from '~/server/api/router';
+import SuperJSON from 'superjson';
+import { prisma } from '~/server/db';
 
 const Sets: React.FC = () => {
-  const { data: sets, isLoading, isError } = trpc.sets.getAllPublic.useQuery();
+  const { data: sets, isError } = trpc.sets.getAllPublic.useQuery();
 
-  if (isLoading) return <LoadingPage />;
   if (isError) return <ErrorPage />;
 
   return (
@@ -63,5 +67,22 @@ const Page: NextPage = () => (
     <Sets />
   </>
 );
+
+export const getStaticProps: GetStaticProps = async () => {
+  const ssg = createServerSideHelpers({
+    router: appRouter,
+    ctx: { prisma, session: null },
+    transformer: SuperJSON,
+  });
+
+  await ssg.sets.getAllPublic.prefetch();
+
+  return {
+    props: {
+      trpcState: ssg.dehydrate(),
+    },
+    revalidate: true,
+  };
+};
 
 export default Page;

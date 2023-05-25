@@ -16,7 +16,7 @@ const Update: React.FC<{ session: Session }> = ({ session }) => {
   const { id } = router.query;
 
   const { mutate, isLoading: isMutating } = trpc.sets.update.useMutation({
-    onSuccess: () => router.push('/'),
+    onSuccess: () => router.push('/sets/my'),
     onError: () => toast.error('Failed to update Set! Please try again later.'),
   });
 

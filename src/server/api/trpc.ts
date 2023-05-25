@@ -4,16 +4,10 @@ import { getServerAuthSession } from '~/server/auth';
 import { initTRPC, TRPCError } from '@trpc/server';
 import { prisma } from '~/server/db';
 
-export const createContext = async ({ req, res }: CreateNextContextOptions) => {
-  const session = await getServerAuthSession({ req, res });
-
-  return {
-    req,
-    res,
-    session,
-    prisma,
-  };
-};
+export const createContext = async ({ req, res }: CreateNextContextOptions) => ({
+  session: await getServerAuthSession({ req, res }),
+  prisma,
+});
 
 const t = initTRPC.context<typeof createContext>().create({
   transformer: SuperJSON,
