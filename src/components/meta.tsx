@@ -8,9 +8,9 @@ export const Meta: React.FC<{
   <Head>
     <meta charSet="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
     <meta name="author" content="Zétény Nagy" />
+    <link rel="author" href="https://znagy.hu" />
 
     <meta
       name="keywords"
@@ -26,8 +26,10 @@ export const Meta: React.FC<{
     <meta name="twitter:card" content="summary" />
 
     <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="rating" content="general" />
+    <meta
+      name="googlebot"
+      content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    />
 
     <title>{title}</title>
     <meta property="og:title" content={title} />
@@ -37,8 +39,6 @@ export const Meta: React.FC<{
     <meta property="og:description" content={description} />
     <meta name="twitter:description" content={description} />
 
-    <meta name="url" content={`https://flashcards.znagy.hu${path}`} />
     <meta property="og:url" content={`https://flashcards.znagy.hu${path}`} />
-    <meta property="twitter:url" content={`https://flashcards.znagy.hu${path}`} />
   </Head>
 );
