@@ -25,7 +25,7 @@ const Sets: React.FC = () => {
   if (isError) return <ErrorPage />;
 
   return (
-    <main className="mx-auto flex w-fit flex-col gap-4 p-6">
+    <main className="mx-auto flex max-w-5xl flex-col gap-4 p-6">
       <Input placeholder="Search" value={query} onChange={(e) => serQuery(e.target.value)} />
 
       {isLoading && <LoadingSpinner />}
@@ -35,7 +35,7 @@ const Sets: React.FC = () => {
           <Link
             href={`/sets/${encodeURIComponent(id)}`}
             key={id}
-            className="flex h-52 w-80 flex-col gap-3 overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
+            className="flex h-52 flex-col gap-3 overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
           >
             <div className="flex items-center justify-between">
               <div>
@@ -78,7 +78,7 @@ const Page: NextPage = () => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  await ssg.sets.getAllPublic.prefetch({ query: null });
+  await ssg.sets.getAllPublic.prefetch({ query: '' });
 
   return {
     props: {

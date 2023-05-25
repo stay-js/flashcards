@@ -80,59 +80,57 @@ const Sets: React.FC = () => {
         </Dialog>
       </Transition>
 
-      <main className="mx-auto w-fit p-6">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <Link
-            href="/sets/create"
-            className="grid h-52 w-80 cursor-pointer place-items-center rounded-lg border bg-white shadow-sm"
+      <main className="mx-auto grid max-w-5xl gap-4 p-6 md:grid-cols-2 lg:grid-cols-3">
+        <Link
+          href="/sets/create"
+          className="grid h-52 cursor-pointer place-items-center rounded-lg border bg-white shadow-sm"
+        >
+          <FiPlus size={48} />
+        </Link>
+
+        {sets?.map(({ id, name, description, _count: { cards }, visibility, category }) => (
+          <div
+            key={id}
+            className="flex h-52 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
           >
-            <FiPlus size={48} />
-          </Link>
-
-          {sets?.map(({ id, name, description, _count: { cards }, visibility, category }) => (
-            <div
-              key={id}
-              className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
-            >
-              <Link href={`/sets/${encodeURIComponent(id)}`} className="flex h-full flex-col gap-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
-                    <h3 className="line-clamp-2">{description}</h3>
-                  </div>
-
-                  <FaExternalLinkAlt
-                    className="text-transparent transition-all duration-200 group-hover:text-black"
-                    size={20}
-                  />
+            <Link href={`/sets/${encodeURIComponent(id)}`} className="flex h-full flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
+                  <h3 className="line-clamp-2">{description}</h3>
                 </div>
 
-                <div className="flex gap-2">
-                  <span className="flex w-fit items-center rounded-full bg-gray-200 px-3 py-1.5 ">
-                    {visibility === 'PRIVATE' ? <TbLock /> : <TbWorld />}
-                  </span>
-
-                  <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
-                    {cards} cards
-                  </span>
-
-                  <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
-                    {category}
-                  </span>
-                </div>
-              </Link>
+                <FaExternalLinkAlt
+                  className="text-transparent transition-all duration-200 group-hover:text-black"
+                  size={20}
+                />
+              </div>
 
               <div className="flex gap-2">
-                <Button color="red" href={`/sets/update/${encodeURIComponent(id)}`}>
-                  Update <span className="hidden sm:inline-block">Set</span>
-                </Button>
-                <Button color="red" onClick={() => setSetToDelete(id)}>
-                  Delete <span className="hidden sm:inline-block">Set</span>
-                </Button>
+                <span className="flex w-fit items-center rounded-full bg-gray-200 px-3 py-1.5 ">
+                  {visibility === 'PRIVATE' ? <TbLock /> : <TbWorld />}
+                </span>
+
+                <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
+                  {cards} cards
+                </span>
+
+                <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
+                  {category}
+                </span>
               </div>
+            </Link>
+
+            <div className="flex gap-2">
+              <Button color="red" href={`/sets/update/${encodeURIComponent(id)}`}>
+                Update <span className="hidden sm:inline-block">Set</span>
+              </Button>
+              <Button color="red" onClick={() => setSetToDelete(id)}>
+                Delete <span className="hidden sm:inline-block">Set</span>
+              </Button>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </main>
     </>
   );
