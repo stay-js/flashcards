@@ -3,7 +3,7 @@ import { FaGithub } from 'react-icons/fa';
 
 export const SignIn: React.FC = () => (
   <main
-    className="mx-auto flex w-11/12 flex-col items-center justify-center gap-4"
+    className="flex flex-col items-center justify-center gap-4"
     style={{
       height: 'calc(100vh - 4.5rem)',
     }}

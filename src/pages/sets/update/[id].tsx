@@ -29,7 +29,7 @@ const Update: React.FC<{ session: Session }> = ({ session }) => {
   if (!set || session.user?.id !== set.userId) return <FourOhFourPage />;
 
   return (
-    <main className="p-6">
+    <main>
       <MutateSet
         defaultValues={set}
         mutate={(data) => mutate({ ...data, id })}

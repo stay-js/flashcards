@@ -16,7 +16,7 @@ const Create: React.FC = () => {
   });
 
   return (
-    <main className="p-6">
+    <main>
       <MutateSet mutate={mutate} isMutating={isMutating} />
     </main>
   );

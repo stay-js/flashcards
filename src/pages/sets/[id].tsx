@@ -41,7 +41,7 @@ const Set: React.FC<{ set: SetWithCardsAndUser }> = ({
   };
 
   return (
-    <main className="mx-auto flex max-w-4xl flex-col gap-4 p-6">
+    <main className="flex max-w-4xl flex-col gap-4">
       <div>
         <h1 className="text-3xl font-bold">{name}</h1>
         <h2 className="text-lg">{description}</h2>

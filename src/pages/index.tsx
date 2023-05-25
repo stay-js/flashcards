@@ -25,7 +25,7 @@ const Sets: React.FC = () => {
   if (isError) return <ErrorPage />;
 
   return (
-    <main className="mx-auto flex max-w-5xl flex-col gap-4 p-6">
+    <main className="flex max-w-5xl flex-col gap-4">
       <h1 className="pb-12 pt-8 text-center text-5xl font-bold text-neutral-800 underline decoration-blue-600 decoration-wavy underline-offset-8">
         Discover Sets
       </h1>

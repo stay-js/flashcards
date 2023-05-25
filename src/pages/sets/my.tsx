@@ -80,7 +80,7 @@ const Sets: React.FC = () => {
         </Dialog>
       </Transition>
 
-      <main className="mx-auto grid max-w-5xl gap-4 p-6 md:grid-cols-2 lg:grid-cols-3">
+      <main className="grid max-w-5xl gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Link
           href="/sets/create"
           className="grid h-52 cursor-pointer place-items-center rounded-lg border bg-white shadow-sm"
