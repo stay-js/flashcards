@@ -112,11 +112,11 @@ const Sets: React.FC = () => {
                 </span>
 
                 <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
-                  {cards} cards
+                  {category}
                 </span>
 
                 <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
-                  {category}
+                  {cards} cards
                 </span>
               </div>
             </Link>
