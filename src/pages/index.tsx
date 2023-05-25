@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { Dialog, Transition } from '@headlessui/react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
+import { TbLock, TbWorld } from 'react-icons/tb';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
 import { Meta } from '~/components/meta';
@@ -88,7 +89,7 @@ const Sets: React.FC = () => {
             <FiPlus size={48} />
           </Link>
 
-          {sets?.map(({ id, name, description, _count: { cards } }) => (
+          {sets?.map(({ id, name, description, _count: { cards }, visibility }) => (
             <div
               key={id}
               className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
@@ -109,8 +110,14 @@ const Sets: React.FC = () => {
                   />
                 </Link>
 
-                <div className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5">
-                  <span className="text-xs font-medium text-gray-800">{cards} cards</span>
+                <div className="flex gap-2">
+                  <span className="flex w-fit items-center rounded-full bg-gray-200 px-3 py-1.5 ">
+                    {visibility === 'PRIVATE' ? <TbLock /> : <TbWorld />}
+                  </span>
+
+                  <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
+                    {cards} cards
+                  </span>
                 </div>
               </div>
 
