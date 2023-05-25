@@ -2,7 +2,6 @@ import type { NextPage, GetStaticProps } from 'next';
 import { useEffect, useState, useDeferredValue } from 'react';
 import Link from 'next/link';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import { TbLock, TbWorld } from 'react-icons/tb';
 import { trpc } from '~/utils/trpc';
 import { ssg } from '~/utils/trpc-ssg-helper';
 import { Meta } from '~/components/meta';
@@ -60,7 +59,7 @@ const Sets: React.FC = () => {
       {!isLoading &&
         (sets.length ? (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {sets.map(({ id, name, description, _count: { cards }, visibility, category }) => (
+            {sets.map(({ id, name, description, _count: { cards }, category }) => (
               <Link
                 href={`/sets/${encodeURIComponent(id)}`}
                 key={id}
@@ -79,16 +78,12 @@ const Sets: React.FC = () => {
                 </div>
 
                 <div className="flex gap-2">
-                  <span className="flex w-fit items-center rounded-full bg-gray-200 px-3 py-1.5 ">
-                    {visibility === 'PRIVATE' ? <TbLock /> : <TbWorld />}
-                  </span>
-
                   <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
                     {category}
                   </span>
 
                   <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
-                    {cards} cards
+                    {cards} {cards === 1 ? 'card' : 'cards'}
                   </span>
                 </div>
               </Link>
