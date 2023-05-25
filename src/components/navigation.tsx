@@ -29,7 +29,7 @@ export const Navigation: React.FC = () => {
 
   return (
     <header>
-      <nav className="relative z-10 flex h-20 items-center justify-between bg-white px-6 py-4 shadow-sm">
+      <nav className="relative z-10 flex min-h-[5rem] items-center justify-between bg-white px-6 py-4 shadow-sm">
         {session ? (
           <div className="flex items-center gap-4">
             {session.user?.image && (
