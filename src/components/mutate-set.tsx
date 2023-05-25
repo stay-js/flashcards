@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { z } from 'zod';
 import { Select, Input, Textarea } from '~/components/input';
 import { Button } from '~/components/button';
+import { categories } from '~/constants/categories';
 
 export const setSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(200),
+  category: z.enum(categories),
   visibility: z.enum(['PUBLIC', 'PRIVATE']),
   cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })).min(1),
 });
@@ -15,6 +17,7 @@ type SetSchema = z.infer<typeof setSchema>;
 const emptyDefaultValues: SetSchema = {
   name: '',
   description: '',
+  category: 'Other',
   visibility: 'PRIVATE',
   cards: [{ front: '', back: '' }],
 };
@@ -42,18 +45,6 @@ export const MutateSet: React.FC<{
         </Button>
       </div>
 
-      <Select
-        label="Visibility:"
-        value={values.visibility}
-        onChange={(e) =>
-          setValues({ ...values, visibility: e.target.value as 'PUBLIC' | 'PRIVATE' })
-        }
-        options={[
-          { label: 'Private', value: 'PRIVATE' },
-          { label: 'Public', value: 'PUBLIC' },
-        ]}
-      />
-
       <div className="flex flex-col gap-4">
         <Input
           required
@@ -73,6 +64,27 @@ export const MutateSet: React.FC<{
           onChange={(e) => setValues({ ...values, description: e.target.value })}
         />
       </div>
+
+      <Select
+        label="Category:"
+        value={values.category}
+        onChange={(e) =>
+          setValues({ ...values, category: e.target.value as (typeof categories)[number] })
+        }
+        options={categories.map((category) => ({ label: category, value: category }))}
+      />
+
+      <Select
+        label="Visibility:"
+        value={values.visibility}
+        onChange={(e) =>
+          setValues({ ...values, visibility: e.target.value as 'PUBLIC' | 'PRIVATE' })
+        }
+        options={[
+          { label: 'Private', value: 'PRIVATE' },
+          { label: 'Public', value: 'PUBLIC' },
+        ]}
+      />
 
       {values.cards.map((card, index) => (
         <div key={index}>

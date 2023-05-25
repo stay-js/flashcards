@@ -22,6 +22,7 @@ model Set {
     userId      String
     name        String     @db.VarChar(50)
     description String     @db.VarChar(200)
+    category    String     @db.VarChar(20)
     visibility  Visibility
     cards       Card[]
     createdAt   DateTime   @default(now())

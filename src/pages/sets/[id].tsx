@@ -16,7 +16,7 @@ const Page: NextPage<{
     user: User;
     cards: Card[];
   };
-}> = ({ set: { user, name, description, cards, visibility } }) => {
+}> = ({ set: { user, name, description, category, cards, visibility } }) => {
   const [currentCard, setCurrentCard] = useState<number>(0);
   const [isShowing, setIsShowing] = useState<boolean>(true);
   const [flipped, setFlipped] = useState<boolean>(false);
@@ -54,6 +54,9 @@ const Page: NextPage<{
         <div>
           <h1 className="text-3xl font-bold">{name}</h1>
           <h2 className="text-lg">{description}</h2>
+          <p>
+            Category: <b>{category}</b>
+          </p>
         </div>
 
         <div className="flex items-center justify-between">

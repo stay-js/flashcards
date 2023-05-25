@@ -89,7 +89,7 @@ const Sets: React.FC = () => {
             <FiPlus size={48} />
           </Link>
 
-          {sets?.map(({ id, name, description, _count: { cards }, visibility }) => (
+          {sets?.map(({ id, name, description, _count: { cards }, visibility, category }) => (
             <div
               key={id}
               className="flex h-52 w-80 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
@@ -117,6 +117,10 @@ const Sets: React.FC = () => {
 
                   <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
                     {cards} cards
+                  </span>
+
+                  <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">
+                    {category}
                   </span>
                 </div>
               </div>
