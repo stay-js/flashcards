@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useState, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { Dialog, Transition } from '@headlessui/react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 import { TbLock, TbWorld } from 'react-icons/tb';
 import { toast } from 'react-hot-toast';
@@ -91,19 +90,12 @@ const Sets: React.FC = () => {
         {sets?.map(({ id, name, description, _count: { cards }, visibility, category }) => (
           <div
             key={id}
-            className="flex h-52 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
+            className="flex h-52 flex-col justify-between overflow-hidden rounded-lg border bg-white p-4 shadow-sm transition hover:bg-neutral-50"
           >
             <Link href={`/sets/${encodeURIComponent(id)}`} className="flex h-full flex-col gap-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
-                  <h3 className="line-clamp-2">{description}</h3>
-                </div>
-
-                <FaExternalLinkAlt
-                  className="text-transparent transition-all duration-200 group-hover:text-black"
-                  size={20}
-                />
+              <div>
+                <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
+                <h3 className="line-clamp-2">{description}</h3>
               </div>
 
               <div className="flex gap-2">
@@ -122,10 +114,14 @@ const Sets: React.FC = () => {
             </Link>
 
             <div className="flex gap-2">
-              <Button color="red" href={`/sets/update/${encodeURIComponent(id)}`}>
+              <Button
+                color="red"
+                className="w-full text-center"
+                href={`/sets/update/${encodeURIComponent(id)}`}
+              >
                 Update <span className="hidden sm:inline-block">Set</span>
               </Button>
-              <Button color="red" onClick={() => setSetToDelete(id)}>
+              <Button color="red" className="w-full text-center" onClick={() => setSetToDelete(id)}>
                 Delete <span className="hidden sm:inline-block">Set</span>
               </Button>
             </div>

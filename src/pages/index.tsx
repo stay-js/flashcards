@@ -1,7 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next';
 import { useEffect, useState, useDeferredValue } from 'react';
 import Link from 'next/link';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import { trpc } from '~/utils/trpc';
 import { ssg } from '~/utils/trpc-ssg-helper';
 import { Meta } from '~/components/meta';
@@ -63,18 +62,11 @@ const Sets: React.FC = () => {
               <Link
                 href={`/sets/${encodeURIComponent(id)}`}
                 key={id}
-                className="flex h-52 flex-col gap-3 overflow-hidden rounded-lg border bg-white p-4 shadow-sm"
+                className="flex h-52 flex-col gap-3 overflow-hidden rounded-lg border bg-white p-4 shadow-sm transition hover:bg-neutral-50"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
-                    <h3 className="line-clamp-2">{description}</h3>
-                  </div>
-
-                  <FaExternalLinkAlt
-                    className="text-transparent transition-all duration-200 group-hover:text-black"
-                    size={20}
-                  />
+                <div>
+                  <h2 className="line-clamp-1 text-lg font-bold">{name}</h2>
+                  <h3 className="line-clamp-2">{description}</h3>
                 </div>
 
                 <div className="flex gap-2">
