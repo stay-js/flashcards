@@ -7,7 +7,7 @@ import { categories } from '~/constants/categories';
 export const setSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(200),
-  category: z.enum(categories),
+  category: z.string().refine((value) => categories.includes(value as (typeof categories)[number])),
   visibility: z.enum(['PUBLIC', 'PRIVATE']),
   cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })).min(1),
 });

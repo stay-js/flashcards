@@ -1,10 +1,24 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { router, protectedProcedure } from '../../trpc';
+import { router, publicProcedure, protectedProcedure } from '../../trpc';
 import { setSchema } from '~/components/mutate-set';
 
 export const setsRouter = router({
-  getAll: protectedProcedure.query(({ ctx }) => {
+  getAllPublic: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.set.findMany({
+      where: {
+        visibility: 'PUBLIC',
+      },
+      include: {
+        _count: {
+          select: {
+            cards: true,
+          },
+        },
+      },
+    });
+  }),
+  getAllByUser: protectedProcedure.query(({ ctx }) => {
     return ctx.prisma.set.findMany({
       where: {
         userId: ctx.session.user.id,
