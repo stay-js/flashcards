@@ -32,3 +32,5 @@ export const trpc = createTRPCNext<AppRouter>({
 
 export type RouterInputs = inferRouterInputs<AppRouter>;
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
+
+export * from './trpc-ssg-helper';

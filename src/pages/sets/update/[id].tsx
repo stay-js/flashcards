@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
-import { Meta } from '~/components/meta';
+import { FourOhFourPage } from '~/pages/404';
 import { SignIn } from '~/components/sign-in';
 import { MutateSet } from '~/components/mutate-set';
-import { FourOhFourPage } from '~/pages/404';
 import { LoadingPage } from '~/components/states';
+import { Meta } from '~/components/meta';
 
 const Update: React.FC<{ session: Session }> = ({ session }) => {
   const router = useRouter();

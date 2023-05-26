@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
-import { Meta } from '~/components/meta';
 import { SignIn } from '~/components/sign-in';
 import { MutateSet } from '~/components/mutate-set';
+import { Meta } from '~/components/meta';
 
 const Create: React.FC = () => {
   const router = useRouter();

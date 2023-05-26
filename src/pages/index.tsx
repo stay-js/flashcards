@@ -1,11 +1,10 @@
 import type { NextPage, GetStaticProps } from 'next';
 import { useEffect, useState, useDeferredValue } from 'react';
 import Link from 'next/link';
-import { trpc } from '~/utils/trpc';
-import { ssg } from '~/utils/trpc-ssg-helper';
-import { Meta } from '~/components/meta';
+import { trpc, ssg } from '~/utils/trpc';
 import { ErrorPage, LoadingSpinner } from '~/components/states';
 import { Input, Select } from '~/components/input';
+import { Meta } from '~/components/meta';
 import { categories } from '~/constants/categories';
 
 const Sets: React.FC = () => {

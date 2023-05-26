@@ -7,10 +7,10 @@ import { FiPlus } from 'react-icons/fi';
 import { TbLock, TbWorld } from 'react-icons/tb';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
-import { Meta } from '~/components/meta';
 import { SignIn } from '~/components/sign-in';
 import { Button } from '~/components/button';
 import { LoadingPage, ErrorPage } from '~/components/states';
+import { Meta } from '~/components/meta';
 
 const Sets: React.FC = () => {
   const [setToDelete, setSetToDelete] = useState<string | null>(null);

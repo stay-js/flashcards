@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Meta } from '~/components/meta';
 import { Button } from '~/components/button';
+import { Meta } from '~/components/meta';
 
 export const FourOhFourPage: React.FC = () => (
   <main className="flex flex-col items-center gap-12 py-20">
