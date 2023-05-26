@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticPaths, GetStaticProps } from 'next';
-import type { Card, Set as SetType, User } from '@prisma/client';
+import type { RouterOutputs } from '~/utils/trpc';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, Fragment } from 'react';
@@ -9,15 +9,10 @@ import { TbLock, TbWorld } from 'react-icons/tb';
 import { ssg } from '~/utils/trpc-ssg-helper';
 import { trpc } from '~/utils/trpc';
 import { Meta } from '~/components/meta';
-import { FourOhFourPage } from '~/pages/404';
 import { LoadingPage } from '~/components/states';
+import { FourOhFourPage } from '~/pages/404';
 
-type SetWithCardsAndUser = SetType & {
-  user: User;
-  cards: Card[];
-};
-
-const Set: React.FC<{ set: SetWithCardsAndUser }> = ({
+const Set: React.FC<{ set: RouterOutputs['sets']['getByID'] }> = ({
   set: { user, name, description, category, cards, visibility },
 }) => {
   const [currentCard, setCurrentCard] = useState<number>(0);
@@ -138,12 +133,9 @@ const Error: React.FC<{ path: string }> = ({ path }) => (
 );
 
 const Page: NextPage<{ id: string }> = ({ id }) => {
+  const { asPath: path } = useRouter();
   const { data: session, status } = useSession();
-  const { data: set, isLoading } = trpc.sets.getByID.useQuery({ id });
-
-  const path = useRouter().asPath;
-
-  if (isLoading) console.log('Loading');
+  const { data: set } = trpc.sets.getByID.useQuery({ id });
 
   if (!set) return <Error path={path} />;
 
