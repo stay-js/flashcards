@@ -56,6 +56,7 @@ export const MutateSet: React.FC<{
         />
 
         <Textarea
+          required
           label="Description:"
           placeholder="Please provide a description for this set!"
           rows={4}
