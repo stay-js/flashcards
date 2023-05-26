@@ -6,9 +6,11 @@ import { useState, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { Transition } from '@headlessui/react';
 import { TbLock, TbWorld } from 'react-icons/tb';
-import { trpc, ssg } from '~/utils/trpc';
-import { Meta } from '~/components/meta';
+import { trpc } from '~/utils/trpc';
+import { ssg } from '~/utils/trpc-ssg-helper';
 import { LoadingPage } from '~/components/states';
+import { PaginationButton } from '~/components/pagination-button';
+import { Meta } from '~/components/meta';
 import { FourOhFourPage } from '~/pages/404';
 
 const Set: React.FC<{ set: RouterOutputs['sets']['getByID'] }> = ({
@@ -24,14 +26,6 @@ const Set: React.FC<{ set: RouterOutputs['sets']['getByID'] }> = ({
     setCurrentCard((value) => value + amount);
 
     setTimeout(() => setIsShowing(true), 300);
-  };
-
-  const incrementCard = () => {
-    if (currentCard !== cards.length - 1) mutateCard(1);
-  };
-
-  const decrementCard = () => {
-    if (currentCard !== 0) mutateCard(-1);
   };
 
   return (
@@ -93,23 +87,21 @@ const Set: React.FC<{ set: RouterOutputs['sets']['getByID'] }> = ({
       </div>
 
       <div className="flex items-center justify-between">
-        <button
-          className="select-none rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
-          onClick={decrementCard}
-        >
-          Prev<span className="hidden sm:inline-block">ious</span>
-        </button>
+        <PaginationButton
+          direction="prev"
+          disabled={currentCard === 0}
+          onClick={() => mutateCard(-1)}
+        />
 
-        <span className="text-center text-xl font-medium">
-          Card {currentCard + 1} of {cards.length}
+        <span className="text-center text-lg">
+          Card <b>{currentCard + 1}</b> of <b>{cards.length}</b>
         </span>
 
-        <button
-          className="select-none rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300"
-          onClick={incrementCard}
-        >
-          Next
-        </button>
+        <PaginationButton
+          direction="next"
+          disabled={currentCard === cards.length - 1}
+          onClick={() => mutateCard(1)}
+        />
       </div>
     </main>
   );

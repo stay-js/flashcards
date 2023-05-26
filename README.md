@@ -16,7 +16,3 @@ Quizlet like Flashcards App with [GitHub](https://github.com) authentication, bu
 - [NextAuth.js](https://next-auth.js.org)
 - [PlanetScale (MySQL)](https://planetscale.com)
 - [Prisma](https://prisma.io)
-
-## Todo
-
-- [ ] Add pagination
