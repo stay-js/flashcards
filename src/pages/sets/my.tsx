@@ -82,7 +82,7 @@ const Sets: React.FC = () => {
       <main className="grid max-w-5xl gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Link
           href="/sets/create"
-          className="grid h-52 cursor-pointer place-items-center rounded-lg border bg-white shadow-sm"
+          className="grid h-52 cursor-pointer place-items-center rounded-lg border bg-white shadow-sm transition hover:bg-neutral-50"
         >
           <FiPlus size={48} />
         </Link>
