@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
 import { FourOhFourPage } from '~/pages/404';
-import { SignIn } from '~/components/sign-in';
 import { MutateSet } from '~/components/mutate-set';
 import { LoadingPage } from '~/components/states';
 import { Meta } from '~/components/meta';
@@ -40,17 +39,24 @@ const Update: React.FC<{ session: Session }> = ({ session }) => {
 };
 
 const Page: NextPage = () => {
-  const { data: session } = useSession();
+  const router = useRouter();
+
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      void router.push(`/sign-in?callbackUrl=${encodeURIComponent(router.asPath)}`);
+    },
+  });
 
   return (
     <>
       <Meta
-        path={useRouter().asPath}
+        path={router.asPath}
         title="Update Set - Flashcards"
         description="Update Set - Flashcards"
       />
 
-      {session ? <Update session={session} /> : <SignIn />}
+      {session && <Update session={session} />}
     </>
   );
 };

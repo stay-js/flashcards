@@ -1,5 +1,5 @@
-import type { Session } from 'next-auth';
 import type { AppType } from 'next/dist/shared/lib/utils';
+import type { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from 'react-hot-toast';

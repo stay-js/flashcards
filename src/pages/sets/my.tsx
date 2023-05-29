@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { Dialog, Transition } from '@headlessui/react';
@@ -7,7 +8,6 @@ import { FiPlus } from 'react-icons/fi';
 import { TbLock, TbWorld } from 'react-icons/tb';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
-import { SignIn } from '~/components/sign-in';
 import { Button } from '~/components/button';
 import { LoadingPage, ErrorPage } from '~/components/states';
 import { Meta } from '~/components/meta';
@@ -133,13 +133,20 @@ const Sets: React.FC = () => {
 };
 
 const Page: NextPage = () => {
-  const { data: session } = useSession();
+  const router = useRouter();
+
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      void router.push(`/sign-in?callbackUrl=${encodeURIComponent(router.asPath)}`);
+    },
+  });
 
   return (
     <>
       <Meta path="/" title="My Sets - Flashcards" description="My Sets - Flashcards" />
 
-      {session ? <Sets /> : <SignIn />}
+      {session && <Sets />}
     </>
   );
 };

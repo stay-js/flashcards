@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
-import { SignIn } from '~/components/sign-in';
 import { MutateSet } from '~/components/mutate-set';
 import { Meta } from '~/components/meta';
 
@@ -23,7 +22,14 @@ const Create: React.FC = () => {
 };
 
 const Page: NextPage = () => {
-  const { data: session } = useSession();
+  const router = useRouter();
+
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      void router.push(`/sign-in?callbackUrl=${encodeURIComponent(router.asPath)}`);
+    },
+  });
 
   return (
     <>
@@ -33,7 +39,7 @@ const Page: NextPage = () => {
         description="Create Set - Flashcards"
       />
 
-      {session ? <Create /> : <SignIn />}
+      {session && <Create />}
     </>
   );
 };

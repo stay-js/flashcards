@@ -12,7 +12,7 @@ export const Navigation: React.FC = () => {
 
   const { data: session } = useSession();
 
-  const pathname = useRouter().pathname;
+  const router = useRouter();
 
   const handleClose = () => {
     setIsToggled(false);
@@ -84,7 +84,7 @@ export const Navigation: React.FC = () => {
               <li key={path}>
                 <Link
                   className={`${
-                    path !== pathname ? 'lg:text-neutral-600' : ''
+                    path !== router.asPath ? 'lg:text-neutral-600' : ''
                   } relative flex items-center gap-2 font-bold text-black transition-colors after:absolute after:-bottom-4 after:h-px after:w-full after:bg-neutral-300  lg:static lg:rounded-md lg:px-3 lg:py-2 lg:font-medium lg:after:hidden lg:hover:bg-neutral-300 `}
                   onClick={handleClose}
                   href={path}
@@ -98,7 +98,7 @@ export const Navigation: React.FC = () => {
               {session ? (
                 <Button onClick={() => signOut()}>Sign Out</Button>
               ) : (
-                <Button onClick={() => signIn('github')}>Sign In</Button>
+                <Button onClick={() => signIn()}>Sign In</Button>
               )}
             </li>
           </ul>
