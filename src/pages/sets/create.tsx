@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
 import { MutateSet } from '~/components/mutate-set';
+import { LoadingPage } from '~/components/states';
 import { Meta } from '~/components/meta';
 
 const Create: React.FC = () => {
@@ -39,7 +40,7 @@ const Page: NextPage = () => {
         description="Create Set - Flashcards"
       />
 
-      {session && <Create />}
+      {session ? <Create /> : <LoadingPage />}
     </>
   );
 };

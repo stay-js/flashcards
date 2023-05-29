@@ -146,7 +146,7 @@ const Page: NextPage = () => {
     <>
       <Meta path="/" title="My Sets - Flashcards" description="My Sets - Flashcards" />
 
-      {session && <Sets />}
+      {session ? <Sets /> : <LoadingPage />}
     </>
   );
 };

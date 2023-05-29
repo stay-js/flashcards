@@ -56,7 +56,7 @@ const Page: NextPage = () => {
         description="Update Set - Flashcards"
       />
 
-      {session && <Update session={session} />}
+      {session ? <Update session={session} /> : <LoadingPage />}
     </>
   );
 };
