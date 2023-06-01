@@ -13,6 +13,6 @@ Quizlet like Flashcards App with [GitHub](https://github.com) authentication, bu
 
 - **Deployment**: [Vercel Serverless (/api)](https://vercel.com/docs/concepts/functions/serverless-functions)
 - [tRPC](https://trpc.io)
-- [NextAuth.js](https://next-auth.js.org)
+- [Auth.js (NextAuth)](https://authjs.dev)
 - [PlanetScale (MySQL)](https://planetscale.com)
 - [Prisma](https://prisma.io)
