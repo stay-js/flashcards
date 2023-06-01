@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useState, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { Transition } from '@headlessui/react';
-import { TbLock, TbWorld } from 'react-icons/tb';
+import { TbEyeOff, TbLock, TbWorld } from 'react-icons/tb';
 import { trpc } from '~/utils/trpc';
 import { ssg } from '~/utils/trpc-ssg-helper';
 import { LoadingPage } from '~/components/states';
@@ -60,7 +60,9 @@ const Set: React.FC<{ set: RouterOutputs['sets']['getByID'] }> = ({
           <span className="text-xs text-gray-700">Visibility:</span>
 
           <div className="flex items-center gap-1">
-            {visibility === 'PRIVATE' ? <TbLock /> : <TbWorld />}
+            {visibility === 'PRIVATE' && <TbLock />}
+            {visibility === 'UNLISTED' && <TbEyeOff />}
+            {visibility === 'PUBLIC' && <TbWorld />}
             <b className="text-sm">{visibility.charAt(0) + visibility.slice(1).toLowerCase()}</b>
           </div>
         </div>

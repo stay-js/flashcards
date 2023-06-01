@@ -5,7 +5,7 @@ import { useState, Fragment } from 'react';
 import { useSession } from 'next-auth/react';
 import { Dialog, Transition } from '@headlessui/react';
 import { FiPlus } from 'react-icons/fi';
-import { TbLock, TbWorld } from 'react-icons/tb';
+import { TbEyeOff, TbLock, TbWorld } from 'react-icons/tb';
 import { toast } from 'react-hot-toast';
 import { trpc } from '~/utils/trpc';
 import { Button } from '~/components/button';
@@ -100,7 +100,9 @@ const Sets: React.FC = () => {
 
               <div className="flex gap-2">
                 <span className="flex w-fit items-center rounded-full bg-gray-200 px-3 py-1.5 ">
-                  {visibility === 'PRIVATE' ? <TbLock /> : <TbWorld />}
+                  {visibility === 'PRIVATE' && <TbLock />}
+                  {visibility === 'UNLISTED' && <TbEyeOff />}
+                  {visibility === 'PUBLIC' && <TbWorld />}
                 </span>
 
                 <span className="flex w-fit rounded-full bg-gray-200 px-3 py-1.5 text-xs font-medium text-gray-800">

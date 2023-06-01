@@ -8,7 +8,7 @@ export const setSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(200),
   category: z.string().refine((value) => categories.includes(value as (typeof categories)[number])),
-  visibility: z.enum(['PUBLIC', 'PRIVATE']),
+  visibility: z.enum(['PUBLIC', 'PRIVATE', 'UNLISTED']),
   cards: z.array(z.object({ front: z.string().max(200), back: z.string().max(500) })).min(1),
 });
 
@@ -79,10 +79,11 @@ export const MutateSet: React.FC<{
         label="Visibility:"
         value={values.visibility}
         onChange={(e) =>
-          setValues({ ...values, visibility: e.target.value as 'PUBLIC' | 'PRIVATE' })
+          setValues({ ...values, visibility: e.target.value as 'PUBLIC' | 'UNLISTED' | 'PRIVATE' })
         }
         options={[
           { label: 'Private', value: 'PRIVATE' },
+          { label: 'Unlisted', value: 'UNLISTED' },
           { label: 'Public', value: 'PUBLIC' },
         ]}
       />
