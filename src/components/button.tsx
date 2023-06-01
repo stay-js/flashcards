@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { cn } from '~/utils/cn';
 
 type Color = 'red' | 'green' | 'blue';
 
@@ -8,11 +9,11 @@ const computeClasses = (color: Color) => {
 
   switch (color) {
     case 'red':
-      return `${base} border-red-500 bg-red-500 hover:text-red-500`;
+      return cn(base, 'border-red-500 bg-red-500 hover:text-red-500');
     case 'green':
-      return `${base} border-green-500 bg-green-500 hover:text-green-500`;
+      return cn(base, 'border-green-500 bg-green-500 hover:text-green-500');
     case 'blue':
-      return `${base} border-blue-700 bg-blue-700 hover:text-blue-700`;
+      return cn(base, 'border-blue-700 bg-blue-700 hover:text-blue-700');
   }
 };
 
@@ -27,7 +28,7 @@ export const Button: React.FC<{
 }> = ({ onClick, href, color = 'blue', type = 'button', className = '', disabled, children }) => {
   if (href) {
     return (
-      <Link className={`${computeClasses(color)} ${className}`} href={href}>
+      <Link className={cn(computeClasses(color), className)} href={href}>
         {children}
       </Link>
     );
@@ -37,7 +38,7 @@ export const Button: React.FC<{
     <button
       type={type}
       disabled={disabled}
-      className={`${computeClasses(color)} ${className}`}
+      className={cn(computeClasses(color), className)}
       onClick={onClick}
     >
       {children}

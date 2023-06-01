@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import disableScroll from 'disable-scroll';
+import { cn } from '~/utils/cn';
 import { navItems } from '~/constants/nav-items';
 import { signOut, signIn, useSession } from 'next-auth/react';
 import { Button } from '~/components/button';
@@ -58,34 +59,39 @@ export const Navigation: React.FC = () => {
           onClick={handleToggle}
         >
           <span
-            className={`${
-              isToggled ? 'rotate-45' : '-translate-y-2'
-            } absolute block h-0.5 w-6 bg-current transition-all duration-500`}
+            className={cn(
+              'absolute block h-0.5 w-6 bg-current transition-all duration-500',
+              isToggled ? 'rotate-45' : '-translate-y-2',
+            )}
           />
           <span
-            className={`${
-              isToggled ? 'opacity-0' : ''
-            } absolute block h-0.5 w-4 bg-current transition-all duration-500`}
+            className={cn(
+              'absolute block h-0.5 w-4 bg-current transition-all duration-500',
+              isToggled && 'opacity-0',
+            )}
           />
           <span
-            className={`${
-              isToggled ? 'w-6 -rotate-45' : 'w-2 translate-y-2'
-            } absolute block h-0.5 bg-current transition-all duration-500`}
+            className={cn(
+              'absolute block h-0.5 bg-current transition-all duration-500',
+              isToggled ? 'w-6 -rotate-45' : 'w-2 translate-y-2',
+            )}
           />
         </button>
 
         <div
-          className={`${
-            !isToggled ? 'translate-x-full' : ''
-          } fixed left-0 top-20 h-screen w-full bg-white px-6 py-4 transition duration-500 ease-in-out lg:static lg:flex lg:h-fit lg:w-fit lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:transition-none`}
+          className={cn(
+            'fixed left-0 top-20 h-screen w-full bg-white px-6 py-4 transition duration-500 ease-in-out lg:static lg:flex lg:h-fit lg:w-fit lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:transition-none',
+            !isToggled && 'translate-x-full',
+          )}
         >
           <ul className="flex flex-col gap-8 lg:w-fit lg:flex-row lg:gap-1">
             {navItems.map(({ path, name }) => (
               <li key={path}>
                 <Link
-                  className={`${
-                    path !== router.asPath ? 'lg:text-neutral-600' : ''
-                  } relative flex items-center gap-2 font-bold text-black transition-colors after:absolute after:-bottom-4 after:h-px after:w-full after:bg-neutral-300  lg:static lg:rounded-md lg:px-3 lg:py-2 lg:font-medium lg:after:hidden lg:hover:bg-neutral-300 `}
+                  className={cn(
+                    'relative flex items-center gap-2 font-bold text-black transition-colors after:absolute after:-bottom-4 after:h-px after:w-full after:bg-neutral-300  lg:static lg:rounded-md lg:px-3 lg:py-2 lg:font-medium lg:after:hidden lg:hover:bg-neutral-300',
+                    path !== router.asPath && 'lg:text-neutral-600',
+                  )}
                   onClick={handleClose}
                   href={path}
                 >

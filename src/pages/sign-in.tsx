@@ -11,12 +11,7 @@ const Page: NextPage = () => {
     <>
       <Meta path="/sign-in" title="Sign In - Flashcards" description="Sign In - Flashcards" />
 
-      <main
-        className="flex flex-col items-center justify-center gap-4"
-        style={{
-          height: 'calc(100vh - 4.5rem)',
-        }}
-      >
+      <main className="flex min-h-[calc(100vh-4.5rem)] flex-col items-center justify-center gap-4">
         <h1 className="text-center text-2xl font-bold">
           In order to use the application please sign in...
         </h1>
