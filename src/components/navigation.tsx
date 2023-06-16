@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import disableScroll from 'disable-scroll';
 import { cn } from '~/utils/cn';
 import { navItems } from '~/constants/nav-items';
 import { signOut, signIn, useSession } from 'next-auth/react';
@@ -17,12 +16,14 @@ export const Navigation: React.FC = () => {
 
   const handleClose = () => {
     setIsToggled(false);
-    disableScroll.off();
+    document.body.style.overflowY = 'scroll';
   };
 
   const handleToggle = () => {
     setIsToggled((value) => {
-      value ? disableScroll.off() : disableScroll.on();
+      value
+        ? (document.body.style.overflowY = 'scroll')
+        : (document.body.style.overflowY = 'hidden');
 
       return !value;
     });
@@ -30,7 +31,7 @@ export const Navigation: React.FC = () => {
 
   return (
     <header>
-      <nav className="relative z-10 flex min-h-[5rem] items-center justify-between bg-white px-6 py-4 shadow-sm">
+      <nav className="relative z-10 flex h-20 items-center justify-between bg-white px-6 py-4 shadow-sm">
         {session ? (
           <div className="flex items-center gap-4">
             {session.user?.image && (
@@ -80,8 +81,8 @@ export const Navigation: React.FC = () => {
 
         <div
           className={cn(
-            'fixed left-0 top-20 h-screen w-full bg-white px-6 py-4 transition duration-500 ease-in-out lg:static lg:flex lg:h-fit lg:w-fit lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:transition-none',
-            !isToggled && 'translate-x-full',
+            'fixed left-0 top-20 h-[calc(100vh-5rem)] w-full overflow-y-auto bg-white px-6 pb-20 pt-4 lg:static lg:flex lg:h-fit lg:w-fit lg:p-0',
+            !isToggled && 'hidden',
           )}
         >
           <ul className="flex flex-col gap-8 lg:w-fit lg:flex-row lg:gap-1">
@@ -89,7 +90,7 @@ export const Navigation: React.FC = () => {
               <li key={path}>
                 <Link
                   className={cn(
-                    'relative flex items-center gap-2 font-bold text-black transition-colors after:absolute after:-bottom-4 after:h-px after:w-full after:bg-neutral-300  lg:static lg:rounded-md lg:px-3 lg:py-2 lg:font-medium lg:after:hidden lg:hover:bg-neutral-300',
+                    'relative flex items-center gap-2 font-bold text-black transition-colors after:absolute after:-bottom-4 after:h-px after:w-full after:bg-neutral-300 lg:static lg:rounded-md lg:px-3 lg:py-2 lg:font-medium lg:after:hidden lg:hover:bg-neutral-300',
                     path !== router.asPath && 'lg:text-neutral-600',
                   )}
                   onClick={handleClose}

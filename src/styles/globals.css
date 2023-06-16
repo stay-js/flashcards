@@ -5,3 +5,8 @@
 main {
   @apply mx-auto p-6 pb-20;
 }
+
+/* components/navigation.tsx - if dvh is available override h-[calc(100vh-5rem)] => height: calc(100dvh - 5rem) */
+.h-\[calc\(100vh-5rem\)\] {
+  height: calc(100dvh - 5rem);
+}
