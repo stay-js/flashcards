@@ -61,19 +61,19 @@ export const Navigation: React.FC = () => {
         >
           <span
             className={cn(
-              'absolute block h-0.5 w-6 bg-current transition-all duration-500',
+              'absolute block h-0.5 w-6 bg-current transition-all duration-300',
               isToggled ? 'rotate-45' : '-translate-y-2',
             )}
           />
           <span
             className={cn(
-              'absolute block h-0.5 w-4 bg-current transition-all duration-500',
+              'absolute block h-0.5 w-4 bg-current transition-all duration-300',
               isToggled && 'opacity-0',
             )}
           />
           <span
             className={cn(
-              'absolute block h-0.5 bg-current transition-all duration-500',
+              'absolute block h-0.5 bg-current transition-all duration-300',
               isToggled ? 'w-6 -rotate-45' : 'w-2 translate-y-2',
             )}
           />
