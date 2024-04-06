@@ -14,5 +14,5 @@ Quizlet like Flashcards App with [GitHub](https://github.com) authentication, bu
 - **Deployment**: [Vercel Serverless (/api)](https://vercel.com/docs/concepts/functions/serverless-functions)
 - [tRPC](https://trpc.io)
 - [Auth.js (NextAuth)](https://authjs.dev)
-- [PlanetScale (MySQL)](https://planetscale.com)
+- [Aiven (MySQL)](https://aiven.io)
 - [Prisma](https://prisma.io)
